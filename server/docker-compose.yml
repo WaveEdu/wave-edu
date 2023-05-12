@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  mongo1:
+    image: mongo
+    command: mongod --replSet rs0 --port 27017
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/mongo1:/data/db
+    networks:
+      - mongo-network
+
+  mongo2:
+    image: mongo
+    command: mongod --replSet rs0 --port 27018
+    ports:
+      - "27018:27017"
+    volumes:
+      - ./data/mongo2:/data/db
+    networks:
+      - mongo-network
+
+  mongo3:
+    image: mongo
+    command: mongod --replSet rs0 --port 27019
+    ports:
+      - "27019:27017"
+    volumes:
+      - ./data/mongo3:/data/db
+    networks:
+      - mongo-network
+
+networks:
+  mongo-network:
+
+# then run the following commands:
+# docker-compose up -d
+# docker exec -it <mongo1-container-id> mongo // to discover: docker ps
+# ! // to initiate the replica set
+# rs.initiate()
+# rs.add("mongo2:27018")
+# rs.add("mongo3:27019")
+# use <database-name>
+
+# to remove the containers preserving the replica set data:
+# docker-compose down -v
