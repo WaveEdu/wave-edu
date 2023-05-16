@@ -48,7 +48,7 @@ export async function postAuthLinkController(
     const token = randomToken();
     const link = `${
       req.protocol + "://" + req.get("host")
-    }/auth/login?token=${token}`;
+    }/api/auth/login?token=${token}`;
 
     // Validity limit
     const validUntil = new Date(Date.now() + 15 * 60 * 1000); // in 15 minutes
@@ -102,9 +102,14 @@ export async function getAuthLoginController(
     // mark the token as used
     markTokenAsUsed(magicLink.id);
 
-    // redirect to the login page
-    // TODO: implement session
-    res.send({ magicLink });
+    // add a cookie with the session token
+    res.cookie("node-magic-link-session", magicLink.token, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year
+    });
+
+    // redirect to the home page
+    res.redirect("/api/auth/login/success");
   } catch (error) {
     console.error(error);
     res.sendStatus(500);

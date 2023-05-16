@@ -31,7 +31,7 @@ export async function readUser(id: string) {
       id: id,
     },
   });
-  
+
   console.dir(user, { depth: Infinity });
   console.log("User found!");
   console.log("------------------");
@@ -73,4 +73,10 @@ export async function deleteAllUsers() {
 
   console.log("All users removed");
   console.log("------------------");
+}
+
+export async function getAllUsers() {
+  const users = await prisma.user.findMany();
+
+  return users;
 }

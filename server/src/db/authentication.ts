@@ -12,6 +12,20 @@ export async function getUser(email: string) {
   return user;
 }
 
+export async function getUserBySessionToken(sessionToken: string) {
+  const user = await prisma.user.findFirst({
+    where: {
+      magicLinks: {
+        some: {
+          token: sessionToken,
+        },
+      },
+    },
+  });
+
+  return user;
+}
+
 export async function saveToken(
   userId: string,
   token: string,

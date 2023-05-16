@@ -24,3 +24,10 @@ export function createEmail(email: string, link: string) {
     },
   };
 }
+
+export function authentication(magicLink: string, userId: string) {
+  return crypto
+    .createHmac("sha256", [magicLink, userId].join("/"))
+    .update(process.env.SECRET_KEY as string)
+    .digest("hex");
+}

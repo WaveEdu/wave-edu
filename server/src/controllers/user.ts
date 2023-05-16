@@ -6,6 +6,7 @@ import {
   updateUser,
   deleteUser,
   deleteAllUsers,
+  getAllUsers,
 } from "../db/user";
 
 export async function getUserController(
@@ -94,6 +95,21 @@ export async function deleteAllUsersController(
     await deleteAllUsers();
 
     return res.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+}
+
+export async function getUsersController(
+  req: express.Request,
+  res: express.Response
+) {
+  try {
+    const user = await getAllUsers();
+    if (!user) return res.sendStatus(404);
+
+    return res.status(200).json(user).end();
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
