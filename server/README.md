@@ -47,3 +47,15 @@ docker-compose up -d
 In dev mode server restarts automatically every time you save a file.
 
 `seed.ts` is used to fill the database with fake data.
+
+## Implement a new feature
+
+> in each folder ther is `_template.ts` file that you can copy and rename to start a new file
+> commit each step
+
+1. Create a new branch from `dev` branch
+2. Implement your feature
+   1. create the functions in `src/db` to interact with the database
+   2. create the functions in `src/controllers` to interact with the client
+   3. create the routes in `src/routes` to handle the requests
+3. Test your feature
