@@ -3,7 +3,7 @@ import express from "express";
 //* replace <model> with the name of the model (User, Chat, etc.)
 //* replace <dbFunction> with the name of the function (createUser, readChat, etc.)
 //? uncomment the following line to import the database functions
-// import {<dbFunction>} from "db/<model>";
+// import {<dbFunction>} from "../db/<model>";
 
 //* keep Controller at the end of the function name
 //* replace <Model> with the name of the model (User, Chat, etc.)

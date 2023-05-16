@@ -1,11 +1,12 @@
 import express from "express";
+
 import {
   createUser,
   readUser,
   updateUser,
   deleteUser,
   deleteAllUsers,
-} from "db/user";
+} from "../db/user";
 
 export async function getUserController(
   req: express.Request,

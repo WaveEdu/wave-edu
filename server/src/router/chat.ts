@@ -8,7 +8,7 @@ import {
   postAddParticipantToChatController,
   postChatController,
   putChatController,
-} from "controllers/chat";
+} from "../controllers";
 
 export default (router: express.Router) => {
   router.get("/chat", getChatsController);

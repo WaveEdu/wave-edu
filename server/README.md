@@ -56,6 +56,9 @@ In dev mode server restarts automatically every time you save a file.
 1. Create a new branch from `dev` branch
 2. Implement your feature
    1. create the functions in `src/db` to interact with the database
-   2. create the functions in `src/controllers` to interact with the client
-   3. create the routes in `src/routes` to handle the requests
+   2. Export the functions in `src/db/index.ts`
+   3. create the functions in `src/controllers` to interact with the client
+   4. export the functions in `src/controllers/index.ts`
+   5. create the routes in `src/routes` to handle the requests
+   6. add the routes in `src/routes/index.ts`
 3. Test your feature

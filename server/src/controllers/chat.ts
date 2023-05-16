@@ -9,7 +9,7 @@ import {
   addParticipantToChat,
   removeParticipantFromChat,
   deleteAllChats,
-} from "db/chat";
+} from "../db/chat";
 
 export async function getChatController(
   req: express.Request,

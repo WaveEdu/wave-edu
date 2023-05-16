@@ -6,7 +6,7 @@ import {
   putUserController,
   deleteUserController,
   deleteAllUsersController,
-} from "controllers/user";
+} from "../controllers";
 
 export default (router: express.Router) => {
   router.get("/user/:id", getUserController);
