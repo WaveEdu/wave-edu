@@ -1,25 +1,8 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+import { PrismaClient, User, UserType } from "@prisma/client";
+
 const prisma = new PrismaClient();
 
-// CHAT
-
-async function getChatsOfUser(userId: string) {
-  const chats = await prisma.user.findFirst({
-    where: {
-      id: userId,
-    },
-    select: {
-      chats: true,
-    },
-  });
-
-  console.dir(chats, { depth: Infinity });
-  console.log("------------------");
-
-  return chats;
-}
-
-async function createChat(userId: string, name: string) {
+export async function createChat(userId: string, name: string) {
   //   create chat
   const newChat = await prisma.chat.create({
     data: {
@@ -53,7 +36,23 @@ async function createChat(userId: string, name: string) {
   return newChat.id;
 }
 
-async function getChatById(chatId: string) {
+export async function readChats(userId: string) {
+  const chats = await prisma.user.findFirst({
+    where: {
+      id: userId,
+    },
+    select: {
+      chats: true,
+    },
+  });
+
+  console.dir(chats, { depth: Infinity });
+  console.log("------------------");
+
+  return chats;
+}
+
+export async function readChat(chatId: string) {
   const chat = await prisma.chat.findUnique({
     where: {
       id: chatId,
@@ -67,7 +66,22 @@ async function getChatById(chatId: string) {
   return chat;
 }
 
-async function deleteChat(chatId: string) {
+export async function updateChat(chatId: string, name: string) {
+  const updatedChat = await prisma.chat.update({
+    where: {
+      id: chatId,
+    },
+    data: {
+      name: name,
+    },
+  });
+
+  console.dir(updatedChat, { depth: Infinity });
+  console.log("Chat updated!");
+  console.log("------------------");
+}
+
+export async function deleteChat(chatId: string) {
   //   remove chat from users
   await prisma.chat.update({
     where: {
@@ -91,7 +105,14 @@ async function deleteChat(chatId: string) {
   console.log("------------------");
 }
 
-async function addParticipantToChat(chatId: string, userId: string) {
+export async function deleteAllChats() {
+  await prisma.chat.deleteMany();
+
+  console.log("All chats removed");
+  console.log("------------------");
+}
+
+export async function addParticipantToChat(chatId: string, userId: string) {
   //   add user to chat
   const updatedChat = await prisma.chat.update({
     where: {
@@ -127,7 +148,10 @@ async function addParticipantToChat(chatId: string, userId: string) {
   console.log("------------------");
 }
 
-async function removeParticipantFromChat(chatId: string, userId: string) {
+export async function removeParticipantFromChat(
+  chatId: string,
+  userId: string
+) {
   //   remove chat from user
   const updatedUser = await prisma.user.update({
     where: {
@@ -161,21 +185,3 @@ async function removeParticipantFromChat(chatId: string, userId: string) {
   console.log(updatedChat);
   console.log("------------------");
 }
-//! DEV ONLY
-
-async function removeAllChats() {
-  await prisma.chat.deleteMany();
-
-  console.log("All chats removed");
-  console.log("------------------");
-}
-
-export {
-  getChatsOfUser,
-  createChat,
-  getChatById,
-  deleteChat,
-  addParticipantToChat,
-  removeParticipantFromChat,
-  removeAllChats,
-};
