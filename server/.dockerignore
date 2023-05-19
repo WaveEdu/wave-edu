@@ -1,4 +1,3 @@
 # dockerignore for a node project
-dist/
 node_modules/
-npm-debug.log
+data/
