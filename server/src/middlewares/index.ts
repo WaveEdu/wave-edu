@@ -1,6 +1,6 @@
 import { getUserBySessionToken } from "../db";
 import express from "express";
-import { get, merge } from "lodash";
+import { merge } from "lodash";
 
 export function isAuthenticated(
   req: express.Request,

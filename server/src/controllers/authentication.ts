@@ -73,7 +73,9 @@ export async function postAuthLinkController(
     res.cookie("node-magic-link-check", cookieToken, { httpOnly: true });
 
     // Redirect to the sent page
-    res.redirect(`/api/auth/link/sent?email=${email}`);
+    // res.redirect(`/api/auth/link/sent?email=${email}`);
+    console.log("Email sent!");
+    res.sendStatus(200);
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
@@ -109,7 +111,31 @@ export async function getAuthLoginController(
     });
 
     // redirect to the home page
-    res.redirect("/api/auth/login/success");
+    // res.redirect("/api/auth/login/success");
+    console.log("Login success!");
+    res.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+}
+
+export async function deleteLogoutController(
+  req: express.Request,
+  res: express.Response
+) {
+  try {
+    // retrieve the token from local cookies
+    const sessionToken = req.cookies["node-magic-link-session"];
+    if (!sessionToken) return res.sendStatus(400);
+
+    // clear the cookie
+    res.clearCookie("node-magic-link-session");
+
+    // redirect to the home page
+    // res.redirect("/api/auth/logout/success");
+    console.log("Logout success!");
+    res.sendStatus(200);
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
