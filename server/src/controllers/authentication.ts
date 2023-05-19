@@ -57,17 +57,19 @@ export async function postAuthLinkController(
     const cookieToken = randomToken();
     await saveToken(user.id, token, validUntil, cookieToken);
 
-    // Send the link by email
-    transporter.sendMail(
-      createEmail(email, link),
-      (err: Error | null, info: SentMessageInfo) => {
-        if (err) {
-          return console.log(err);
-        } else {
-          console.log("Email sent: " + info.response);
+    if (process.env.NODE_ENV === "production") {
+      // Send the link by email
+      transporter.sendMail(
+        createEmail(email, link),
+        (err: Error | null, info: SentMessageInfo) => {
+          if (err) {
+            return console.log(err);
+          } else {
+            console.log("Email sent: " + info.response);
+          }
         }
-      }
-    );
+      );
+    }
 
     // Set the cookie anti MITM
     res.cookie("node-magic-link-check", cookieToken, { httpOnly: true });
