@@ -70,8 +70,8 @@ In dev mode server restarts automatically every time you save a file.
 
 ## Implement a new feature
 
-> in each folder ther is `_template.ts` file that you can copy and rename to start a new file
-> commit each step
+> in each folder ther is `template.example` file that you can copy and rename to start a new file.
+> Commit each step
 
 1. Create a new branch from `dev` branch
 2. Implement your feature
