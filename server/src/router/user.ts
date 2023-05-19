@@ -9,7 +9,7 @@ import {
   getUsersController,
 } from "../controllers";
 
-import { isAuthenticated } from "../middlewares";
+import { isAuthenticated, isTeacher } from "../middlewares";
 
 export default (router: express.Router) => {
   router.get("/user/:id", getUserController);
@@ -17,5 +17,5 @@ export default (router: express.Router) => {
   router.put("/user/:id", putUserController);
   router.delete("/user/:id", deleteUserController);
   router.delete("/user", deleteAllUsersController);
-  router.get("/user", isAuthenticated, getUsersController);
+  router.get("/user", isTeacher, getUsersController);
 };
