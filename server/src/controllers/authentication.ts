@@ -75,7 +75,17 @@ export async function postAuthLinkController(
     // Redirect to the sent page
     // res.redirect(`/api/auth/link/sent?email=${email}`);
     console.log("Email sent!");
-    res.sendStatus(200);
+    // send token to client
+    if (process.env.NODE_ENV === "development") {
+      // save token in cookie
+      res.cookie("dev-magic-link-session", token, {
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year
+      });
+      res.status(200).json({ token: token }).end();
+    } else {
+      res.sendStatus(200);
+    }
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
@@ -87,7 +97,14 @@ export async function getAuthLoginController(
   res: express.Response
 ) {
   try {
-    const { token } = req.query;
+    let { token } = req.query;
+
+    // check if the token is present in cookies
+    if (process.env.NODE_ENV === "development") {
+      const cookieToken = req.cookies["dev-magic-link-session"];
+      if (cookieToken) token = cookieToken;
+    }
+
     if (!token) return res.sendStatus(400);
 
     // retrieve the token from local cookies

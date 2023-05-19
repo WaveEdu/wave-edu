@@ -25,6 +25,10 @@ npm run seed
 ## Create an ENV file
 
 ```env
+# environment
+# ! use `development` in local and `production` in production
+NODE_ENV="development"
+
 # port of the server
 API_PORT=
 
