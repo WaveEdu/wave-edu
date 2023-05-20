@@ -22,6 +22,30 @@ npm run studio
 npm run seed
 ```
 
+## Create an ENV file
+
+```env
+# environment
+# ! use `development` in local and `production` in production
+NODE_ENV="development"
+
+# port of the server
+API_PORT=
+
+# url of the database
+DATABASE_URL=""
+
+# magic auth service
+MAGIC_SECRET_KEY=""
+MAGIC_PUBLISHABLE_KEY=""
+
+# email service
+GMAIL_PASSWORD=""
+
+# secret session key
+SECRET_KEY=""
+```
+
 ## Use with MongoDB Atlas (easy)
 
 Create an account for MongoDB Atlas, create a project, create a database.
@@ -50,8 +74,8 @@ In dev mode server restarts automatically every time you save a file.
 
 ## Implement a new feature
 
-> in each folder ther is `_template.ts` file that you can copy and rename to start a new file
-> commit each step
+> in each folder ther is `template.example` file that you can copy and rename to start a new file.
+> Commit each step
 
 1. Create a new branch from `dev` branch
 2. Implement your feature
