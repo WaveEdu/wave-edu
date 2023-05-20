@@ -1,9 +1,12 @@
 {
   "compilerOptions": {
-    "sourceMap": true,
+    "module": "NodeNext",
+    "moduleResolution": "node",
+    "baseUrl": "src",
     "outDir": "dist",
+    "sourceMap": true,
     "strict": true,
-    "lib": ["esnext"],
-    "esModuleInterop": true
-  }
+    "noImplicitAny": true
+  },
+  "include": ["src/**/*"]
 }
