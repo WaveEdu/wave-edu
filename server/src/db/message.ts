@@ -1,4 +1,4 @@
-import { PrismaClient, User, UserType, MessageType } from "@prisma/client";
+import { PrismaClient, User, UserType, MessageType, Lezione, Compito, Sondaggio, Evento } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -14,7 +14,76 @@ export async function getMessagesOfChat(chatId: string) {
   
     return messages;
   }
+
+  export async function createMessage2(
+    chatId: string,
+    content: string,
+    messageType: MessageType,
+    contentLezione?: Lezione,
+    contentCompito?: Compito,
+    contentSondaggio?: Sondaggio,
+    contentEvento?: Evento
+  ) {
+    let data: any = {
+      text: content,
+      messageType: messageType,
+      createdAt: new Date(Date.now()),
+      updatedAt: new Date(Date.now()),
+      Chat: {
+        connect: {
+          id: chatId,
+        },
+      },
+    };
   
+    switch (messageType) {
+      case MessageType.LEZIONE:
+        data.contentLezione = {
+          data: contentLezione?.data || new Date(Date.now()),
+        };
+        break;
+      case MessageType.COMPITO:
+        data.contentCompito = {
+          data: contentCompito?.data || new Date(Date.now()),
+        };
+        break;
+      case MessageType.SONDAGGIO:
+        data.contentSondaggio = {
+          question: contentSondaggio?.question || "",
+          options: contentSondaggio?.options || [],
+        };
+        break;
+      case MessageType.EVENTO:
+        data.contentEvento = {
+          data: contentEvento?.data || new Date(Date.now()),
+        };
+    default:
+        break;
+    }
+  
+    const newMessage = await prisma.message.create({
+      data,
+    });
+  
+    const updatedChat = await prisma.chat.update({
+      where: {
+        id: chatId,
+      },
+      data: {
+        messages: {
+          connect: {
+            id: newMessage.id,
+          },
+        },
+      },
+    });
+  
+    console.dir(newMessage, { depth: Infinity });
+    console.log("Message created!");
+    console.log("------------------");
+    return newMessage.id;
+  }
+
 export async function getUltimateMessagesOfChat(chatId: string) {
     const message = await prisma.chat.findFirst({
       where: {
