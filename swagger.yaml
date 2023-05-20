@@ -4,7 +4,7 @@ info:
   title: "Documentazione API"
 
 host: wave-edu-server.onrender.com:8080
-basePath: /api
+basePath: /
 schemes:
 - https
 consumes:
@@ -25,11 +25,11 @@ paths:
           schema:
             type: object
             properties:
-              name:
-                type: string
               email:
                 type: string
-              UserType:
+              name:
+                type: string
+              uUpserType:
                 type: string
       responses:
         "201":
