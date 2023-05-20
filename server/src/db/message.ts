@@ -2,7 +2,7 @@ import { PrismaClient, User, UserType, MessageType } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-async function getMessagesOfChat(chatId: string) {
+export async function getMessagesOfChat(chatId: string) {
     const messages = await prisma.chat.findMany({
       where: {
         id: chatId,
@@ -15,7 +15,7 @@ async function getMessagesOfChat(chatId: string) {
     return messages;
   }
   
-  async function getUltimateMessagesOfChat(chatId: string) {
+export async function getUltimateMessagesOfChat(chatId: string) {
     const message = await prisma.chat.findFirst({
       where: {
         id: chatId,
@@ -28,7 +28,7 @@ async function getMessagesOfChat(chatId: string) {
     return message;
   }
   
-  async function lastMessage(chatID: string){
+export async function lastMessage(chatID: string){
     const message = await prisma.chat.findUnique({
       where: { id: chatID },
       include: { messages: { orderBy: { createdAt: 'desc' }, take: 1 } },
@@ -40,7 +40,7 @@ async function getMessagesOfChat(chatId: string) {
     return message;
   }
   
-  async function createMessage(chatId: string, content: string, messageType: MessageType) {
+export async function createMessage(chatId: string, content: string, messageType: MessageType) {
     //   create chat
     const newMessage = await prisma.message.create({
       data: {
@@ -77,7 +77,7 @@ async function getMessagesOfChat(chatId: string) {
     return newMessage.id;
   }
   
-  async function getMessageById(messageId: string) {
+  export async function getMessageById(messageId: string) {
     const message = await prisma.message.findUnique({
       where: {
         id: messageId,
@@ -91,7 +91,7 @@ async function getMessagesOfChat(chatId: string) {
     return message;
   }
   
-  async function deleteMessage(messageId: string) {
+  export async function deleteMessage(messageId: string) {
     //   remove message from chat
   
     await prisma.message.delete({
@@ -103,7 +103,7 @@ async function getMessagesOfChat(chatId: string) {
     console.log("Message deleted!");
     console.log("------------------");
   }
-  async function removeAllMessagesChat(chatId: string) {
+  export async function removeAllMessagesChat(chatId: string) {
     await prisma.chat.deleteMany({
       where: {
         id: chatId,
@@ -113,7 +113,7 @@ async function getMessagesOfChat(chatId: string) {
     console.log("All messages removed");
     console.log("------------------");
   }
-  async function updateMessageText(messageId: string, newText: string) {
+  export async function updateMessage(messageId: string, newText: string) {
     const updatedMessage = await prisma.message.update({
       where: { id: messageId },
       data: {
@@ -121,5 +121,10 @@ async function getMessagesOfChat(chatId: string) {
         updatedAt: new Date()
       }
     });
+
+    console.dir(updatedMessage, { depth: Infinity });
+    console.log("Message Update!");
+    console.log("------------------");
+
     return updatedMessage;
   }
