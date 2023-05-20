@@ -19,9 +19,11 @@ app.use(bodyParser.json());
 
 const server = http.createServer(app);
 
-server.listen(process.env.API_PORT, () =>
+server.listen(process.env.API_PORT ?? 3000, () =>
   console.log(`
-🚀 Server ready at: http://localhost:${process.env.API_PORT}/api,\n😄 if you reached this point everything should work`)
+🚀 Server ready at: http://localhost:${
+    process.env.API_PORT ?? 3000
+  }/api,\n😄 if you reached this point everything should work`)
 );
 
 // api can be accessed at http://localhost:PORT/api
