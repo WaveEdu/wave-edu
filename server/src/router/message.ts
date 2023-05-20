@@ -8,6 +8,7 @@ import {
     deleteMessageController,
     getMessagesController,
     deleteMessagesController,
+    postMessageController2,
 } from "../controllers";
 
 export default (router: express.Router) => {
@@ -18,4 +19,5 @@ export default (router: express.Router) => {
     router.put("/message/:id", putMessageController);
     router.delete("/message/:id", deleteMessageController);
     router.delete("/message", deleteMessagesController);
+    router.post("/message/create", postMessageController2);
   };

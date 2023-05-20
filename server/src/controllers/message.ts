@@ -3,6 +3,7 @@ import express from "express";
 import {
     getMessagesOfChat,
     getUltimateMessagesOfChat,
+    createMessage2,
     lastMessage,
     createMessage,
     getMessageById,
@@ -70,6 +71,39 @@ export async function getMessageController(
     }
   }
   
+  export async function postMessageController2(
+    req: express.Request,
+    res: express.Response
+  ) {
+    try {
+      const { ownerId, content, messageType } = req.body;
+      if (!ownerId || !content || !messageType) return res.sendStatus(400);
+      switch (messageType) {
+        case "LEZIONE":
+        case "COMPITO":
+        case "EVENTO":
+            const {data} = req.body
+            if (!data) return res.sendStatus(400);
+            const message1 = await createMessage2(ownerId, content, messageType, data);
+            return res.status(200).json(message1).end();           
+        case "SONDAGGIO":
+            const {question, options} = req.body
+            if (!question || !options) return res.sendStatus(400);
+            const message2 = await createMessage2(ownerId, content, messageType, question, options);
+            return res.status(200).json(message2).end(); 
+        case "COMUNICAZIONE":
+            const message = await createMessage2(ownerId, content, messageType);
+            return res.status(200).json(message).end();
+      default:
+        return res.sendStatus(400)    
+      }
+
+    } catch (error) {
+      console.error(error);
+      res.sendStatus(500);
+    }
+  }
+
   export async function putMessageController(
     req: express.Request,
     res: express.Response
