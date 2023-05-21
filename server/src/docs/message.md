@@ -63,6 +63,37 @@
     "comunicazione": "Buongiorno"
 } 
 ```
+## Get last messages in a chat
+
+`GET /api/message/last`
+
+### Body
+
+```json
+{ "ChatId": "5f9b2b2b2b2b2b2b2b2b2b2b" }
+```
+
+### Response
+
+```json
+[
+  {
+    "id": "5f9b2b2b2b2b2r6r6r6r7f7",
+    "messageType": "SONDAGGIO",
+    "createdAt": "2023-05-20T17:21:08.361+00:00",
+    "updatedAt": "2023-05-20T19:21:08.361+00:00",
+    "ChatId": "5f9b2b2b2b2b2b2b2b2b2",
+    "ownerId": "5f9t5t5t5t5t5t5tt5t5tt5",
+    "question": "Qual è la capitale dell'Italia?",
+    "options":{
+        "1": "Verona",
+        "2": "Brescia",
+        "3": "Venezia",
+        "4": "Roma"
+    }
+  }
+]
+```
 
 ## Creates a message
 
@@ -337,9 +368,9 @@
 }
 ```
 
-## Deletes a user
+## Deletes a message
 
-`DELETE /api/user/:id`
+`DELETE /api/message/:id`
 
 ## Parameters
 
@@ -351,14 +382,52 @@
 
 ```json
 {
-  "id": "5f9b2b2b2b2b2b2b2b2b2b2b",
-  "email": "example@example.com",
-  "name": "John Doe",
-  "role": "TEACHER"
+  "id": "4g43g2gj3424jg23jj22jg3j2g4324o8",
+  "messageType": "COMUNICAZIONE",
+  "chatId": "5f9b2b2b2b2b2b2b2b2b2b4f",
+  "ownerId": "5f9t5t5t5t5t5t5tt5t5t6e",
+  "createdAt": "2023-05-16T17:21:08.361+00:00",
+  "updatedAt": "2023-05-19T17:21:08.361+00:00",
+  "comunicazione": "Annullata uscita anticipata"
 }
 ```
 
-## Deletes all users (NOT FOR PRODUCTION)
+## Deletes all messages
 
-`DELETE /api/user`
+`DELETE /api/message`
+### Body
 
+```json
+{ "ChatId": "5f9b2b2b2b2b2b2b2b2b2b2b" }
+```
+
+### Response
+
+```json
+[
+  {
+    "id": "5f9b2b2b2b2b2r6r6r6r6r6",
+    "messageType": "COMUNICAZIONE",
+    "createdAt": "2023-05-16T17:21:08.361+00:00",
+    "updatedAt": "2023-05-16T17:21:08.361+00:00",
+    "ChatId": "5f9b2b2b2b2b2b2b2b2b2b2b",
+    "ownerId": "5f9t5t5t5t5t5t5tt5t5tt5",
+    "comunicazione": "Buongiorno"
+  }, 
+  {
+    "id": "5f9b2b2b2b2b2r6r6r6r7f7",
+    "messageType": "SONDAGGIO",
+    "createdAt": "2023-05-20T17:21:08.361+00:00",
+    "updatedAt": "2023-05-20T19:21:08.361+00:00",
+    "ChatId": "5f9b2b2b2b2b2b2b2b2b2",
+    "ownerId": "5f9t5t5t5t5t5t5tt5t5tt5",
+    "question": "Qual è la capitale dell'Italia?",
+    "options":{
+        "1": "Verona",
+        "2": "Brescia",
+        "3": "Venezia",
+        "4": "Roma"
+    }
+  }
+]
+```
