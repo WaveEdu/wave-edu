@@ -9,7 +9,7 @@
 ```json
 | Name | Type   | Description                  |
 | :--- | :----- | :--------------------------- |
-| id owner | string | Required. Id of the owner |
+| ownerId | string | Id of the ownerId |
 ```
 
 ### Response
@@ -55,3 +55,22 @@
   }
 ]
 ```
+
+## Create a chat
+
+`POST /api/chat`
+
+### Body
+
+```json
+   Name    |  Type  |     Description                  
+-------------------------------------------------
+  ownerId  | string |    Id of the owner
+-------------------------------------------------
+   name    | string |   name of the chat
+```
+
+### Response
+
+```json
+OK
