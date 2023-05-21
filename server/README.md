@@ -1,5 +1,7 @@
 # Server
 
+> To try the server see [Run a demo](#run-a-demo)
+
 ## Installation
 
 ```bash
@@ -87,7 +89,7 @@ In dev mode server restarts automatically every time you save a file.
    6. add the routes in `src/routes/index.ts`
 3. Test your feature
 
-## A simple test
+## Run a demo
 
 Using Postman or Insomnia, send a `POST` request to `https://wave-edu-server.onrender.com/api/auth/link` with the following body:
 
