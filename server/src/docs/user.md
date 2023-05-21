@@ -29,13 +29,6 @@
 ]
 ```
 
-router.get("/user/:id", getUserController);
-router.post("/user", postUserController);
-router.put("/user/:id", putUserController);
-router.delete("/user/:id", deleteUserController);
-router.delete("/user", deleteAllUsersController);
-router.get("/user", isTeacher, getUsersController);
-
 ## Gets a user by id
 
 `GET /api/user/:id`
@@ -137,3 +130,4 @@ router.get("/user", isTeacher, getUsersController);
 ## Deletes all users (NOT FOR PRODUCTION)
 
 `DELETE /api/user`
+
