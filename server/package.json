@@ -1,10 +1,12 @@
 {
-  "name": "rest-express",
+  "name": "wave-edu-api",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "dev": "npx prisma generate && nodemon src/index.ts",
     "dev:no-generate": "nodemon src/index.ts",
+    "build": "npx prisma generate && tsc",
+    "start": "nodemon dist/index.js",
     "update": "npx prisma generate",
     "studio": "npx prisma studio",
     "seed": "ts-node src/seed.ts"

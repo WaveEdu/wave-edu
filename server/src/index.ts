@@ -21,7 +21,7 @@ const server = http.createServer(app);
 
 server.listen(process.env.API_PORT ?? 3000, () =>
   console.log(`
-🚀 Server ready at: http://localhost:${
+🚀 Server ready at: ${process.env.DEPLOY_URL ?? "http:localhost"}:${
     process.env.API_PORT ?? 3000
   }/api,\n😄 if you reached this point everything should work`)
 );
