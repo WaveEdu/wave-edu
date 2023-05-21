@@ -86,3 +86,49 @@ In dev mode server restarts automatically every time you save a file.
    5. create the routes in `src/routes` to handle the requests
    6. add the routes in `src/routes/index.ts`
 3. Test your feature
+
+## A simple test
+
+Using Postman or Insomnia, send a `POST` request to `https://wave-edu-server.onrender.com/api/auth/link` with the following body:
+
+```json
+{
+  "email": "samumaz01@gmail.com"
+}
+```
+
+Because we leaved the dev mode, you will not receive any mail. In you cookies there should be already the token to access the protected routes.
+
+Run a `GET` request to `https://wave-edu-server.onrender.com/api/auth/login` and you should receive the following response:
+
+> 200 OK
+
+Then you can try to access the protected routes. Run a `GET` request to `https://wave-edu-server.onrender.com/api/user` and you should receive the following response:
+
+> 200 OK
+
+```json
+[
+  {
+    "id": "645bc94420f7e891ad62f99c",
+    "email": "samumaz01@gmail.com",
+    "name": "Samuele Mazzei",
+    "userType": "TEACHER",
+    "chatIDs": ["645bc94520f7e891ad62f9a0"]
+  },
+  {
+    "id": "645bc94420f7e891ad62f99d",
+    "email": "pippo@example.com",
+    "name": "Pippo",
+    "userType": "STUDENT",
+    "chatIDs": []
+  },
+  {
+    "id": "645bc94420f7e891ad62f99e",
+    "email": "pluto@example.com",
+    "name": "Pluto",
+    "userType": "STUDENT",
+    "chatIDs": []
+  }
+]
+```
