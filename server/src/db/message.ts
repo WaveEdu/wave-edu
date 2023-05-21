@@ -1,4 +1,4 @@
-import { PrismaClient, User, UserType, MessageType, Lezione, Compito, Sondaggio, Evento} from "@prisma/client";
+import { PrismaClient, User, UserType, MessageType, Lezione, Compito, Sondaggio, Evento, Comunicazione} from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -17,15 +17,16 @@ export async function getMessagesOfChat(chatId: string) {
 
   export async function createMessage2(
     chatId: string,
-    content: string,
+    ownerId: string,
     messageType: MessageType,
+    // contentSpec: Lezione | Compito | Sondaggio | Evento,
     contentLezione?: Lezione,
     contentCompito?: Compito,
     contentSondaggio?: Sondaggio,
-    contentEvento?: Evento
+    contentEvento?: Evento,
+    contentComunicazione?: Comunicazione
   ) {
     let data: any = {
-      text: content,
       messageType: messageType,
       createdAt: new Date(Date.now()),
       updatedAt: new Date(Date.now()),
@@ -34,17 +35,20 @@ export async function getMessagesOfChat(chatId: string) {
           id: chatId,
         },
       },
+      User
     };
   
     switch (messageType) {
       case MessageType.LEZIONE:
         data.contentLezione = {
           data: contentLezione?.data || new Date(Date.now()),
+          text: contentLezione?.text || "Lezione di Prova",
         };
         break;
       case MessageType.COMPITO:
         data.contentCompito = {
           data: contentCompito?.data || new Date(Date.now()),
+          text: contentCompito?.text || "Compito di Prova",
         };
         break;
       case MessageType.SONDAGGIO:
@@ -56,7 +60,12 @@ export async function getMessagesOfChat(chatId: string) {
       case MessageType.EVENTO:
         data.contentEvento = {
           data: contentEvento?.data || new Date(Date.now()),
+          text: contentEvento?.text || "Evento di Prova",
         };
+        case MessageType.COMUNICAZIONE:
+          data.contentComunicazione = {
+            comunicazione: contentComunicazione?.comunicazione || "Comunicazione di Prova",
+          };
     default:
         break;
     }

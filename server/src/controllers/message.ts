@@ -1,5 +1,5 @@
 import express from "express";
-import Sondaggio from "@prisma/client";
+import {Compito, Comunicazione, Evento, Lezione, Sondaggio} from "@prisma/client";
 import {
     getMessagesOfChat,
     getUltimateMessagesOfChat,
@@ -76,24 +76,38 @@ export async function getMessageController(
     res: express.Response
   ) {
     try {
-      const { ownerId, content, messageType } = req.body;
-      if (!ownerId || !content || !messageType) return res.sendStatus(400);
+      const { chatId, ownerId, messageType } = req.body;
+      if (!chatId || !ownerId || !messageType) return res.sendStatus(400);
       switch (messageType) {
         case "LEZIONE":
         case "COMPITO":
         case "EVENTO":
-            const {data} = req.body
-            if (!data) return res.sendStatus(400);
-            const message1 = await createMessage2(ownerId, content, messageType, data);
-            return res.status(200).json(message1).end();           
+            const {data, text} = req.body
+            if (!data || !text) return res.sendStatus(400);
+            if (messageType == "LEZIONE"){
+                let oggetto:Lezione = {data, text}
+                const message1 = await createMessage2(chatId, ownerId, messageType, oggetto, undefined, undefined, undefined, undefined);
+                return res.status(200).json(message1).end(); 
+            }else if(messageType == "COMPITO"){
+                let oggetto:Compito = {data, text}
+                const message1 = await createMessage2(chatId, ownerId, messageType, undefined, oggetto, undefined, undefined, undefined);
+                return res.status(200).json(message1).end(); 
+            }else{
+                let oggetto:Evento = {data, text}
+                const message1 = await createMessage2(chatId, ownerId, messageType, undefined, undefined, undefined, oggetto, undefined);
+                return res.status(200).json(message1).end(); 
+            }          
         case "SONDAGGIO":
             const {question, options} = req.body
             if (!question || !options) return res.sendStatus(400);
-            let sondaggio:Sondaggio = {question:String, options:Array<String>}
-            const message2 = await createMessage2(ownerId, content, messageType, sondaggio);
+            let sondaggio:Sondaggio = {question, options}
+            const message2 = await createMessage2(chatId, ownerId, messageType, undefined, undefined, sondaggio, undefined);
             return res.status(200).json(message2).end(); 
         case "COMUNICAZIONE":
-            const message = await createMessage2(ownerId, content, messageType);
+            const {comunicazione} = req.body
+            if (!comunicazione) return res.sendStatus(400);
+            let oggetto:Comunicazione = {comunicazione}
+            const message = await createMessage2(chatId, ownerId, messageType, undefined, undefined, undefined, undefined, oggetto );
             return res.status(200).json(message).end();
       default:
         return res.sendStatus(400)    
