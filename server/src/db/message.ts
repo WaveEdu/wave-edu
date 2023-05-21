@@ -158,11 +158,10 @@ export async function lastMessage(chatID: string){
     console.log("All messages removed");
     console.log("------------------");
   }
-  export async function updateMessage(messageId: string, newText: string) {
+  export async function updateMessage(messageId: string) {
     const updatedMessage = await prisma.message.update({
       where: { id: messageId },
       data: {
-        text: newText,
         updatedAt: new Date()
       }
     });
