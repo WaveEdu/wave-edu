@@ -3,10 +3,11 @@
 ## Installation
 
 ```bash
+# node 18.16.0 is required
 npm install
 ```
 
-## Commands
+## Node Commands
 
 ```bash
 # to start the server
@@ -20,6 +21,12 @@ npm run update
 
 # to show the prisma studio (UI for the database)
 npm run studio
+
+# to build the server
+npm run build
+
+# to start the server in production
+npm run start
 
 # to fill the database with fake data DEPRECATED
 # npm run seed
@@ -71,8 +78,6 @@ docker-compose up -d
 ## Notes
 
 In dev mode server restarts automatically every time you save a file.
-
-`seed.ts` is used to fill the database with fake data.
 
 ## Implement a new feature
 
