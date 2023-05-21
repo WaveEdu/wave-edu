@@ -35,7 +35,11 @@ export async function getMessagesOfChat(chatId: string) {
           id: chatId,
         },
       },
-      User
+      User: {
+        connect: {
+          id : ownerId,
+        }
+      }
     };
   
     switch (messageType) {
