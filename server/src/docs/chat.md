@@ -1,6 +1,6 @@
 # Chat Endpoints
 
-## Gets all users
+## Gets all chat
 
 `GET /api/chat`
 
@@ -20,7 +20,6 @@
     "id chat": "string",
     "name": "String",
     "messages": "Message[]", 
-    "userIDs": "String[]",
     "users": "User[]"
   }
 
@@ -28,7 +27,30 @@
     "id chat": "string",
     "name": "String",
     "messages": "Message[]", 
-    "userIDs": "String[]",
+    "users": "User[]"
+  }
+]
+```
+
+## Gets a chat by id
+
+`GET /api/chat:id`
+
+### Parameters
+
+```json
+   Name    |  Type  | Description                  
+-------------------------------------------------
+  id chat | string | Required. Id of the chat 
+```
+
+### Response
+
+```json
+[
+  {
+    "name": "String",
+    "messages": "Message[]", 
     "users": "User[]"
   }
 ]
