@@ -12,24 +12,26 @@ npm install
 # to start the server
 npm run dev
 
+# to start the server without generating the prisma client (faster)
+npm run dev:no-generate
+
 # to update the prisma client (after schema changes)
 npm run update
 
 # to show the prisma studio (UI for the database)
 npm run studio
 
-# to fill the database with fake data
-npm run seed
+# to fill the database with fake data DEPRECATED
+# npm run seed
 ```
 
-## Create an ENV file
+## `.ENV` file
 
-```env
-# environment
-# ! use `development` in local and `production` in production
+```bash
+# environment (use `development` in local and `production` in production)
 NODE_ENV="development"
 
-# port of the server
+# port of the server (es. 8080)
 API_PORT=
 
 # url of the database
@@ -42,7 +44,7 @@ MAGIC_PUBLISHABLE_KEY=""
 # email service
 GMAIL_PASSWORD=""
 
-# secret session key
+# secret session key (to create the session cookie)
 SECRET_KEY=""
 ```
 

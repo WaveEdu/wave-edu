@@ -6,8 +6,7 @@
     "dev": "npx prisma generate && nodemon src/index.ts",
     "dev:no-generate": "nodemon src/index.ts",
     "update": "npx prisma generate",
-    "studio": "npx prisma studio",
-    "seed": "ts-node src/seed.ts"
+    "studio": "npx prisma studio"
   },
   "dependencies": {
     "@prisma/client": "^4.14.0",
