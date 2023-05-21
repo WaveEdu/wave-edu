@@ -49,8 +49,6 @@
 ### Response
 
 ```json
-chat found!
------------------------------
 [
   {
     "name": "String",
@@ -77,7 +75,14 @@ chat found!
 ### Response
 
 ```json
-Chat created!
+[
+  {
+    "id chat": "string",
+    "name": "String",
+    "messages": "Message[]", 
+    "users": "User[]"
+  }
+]
 ```
 
 ## Update a chat by id
@@ -89,7 +94,7 @@ Chat created!
 ```json
    Name    |  Type  |      Description                  
 -------------------------------------------------
-  id chat  | string |  Required. Id of the chat 
+    id     | string |  Required. Id of the chat 
 ```
 
 ### Body
@@ -103,7 +108,12 @@ Chat created!
 ### Response
 
 ```json
-Chat updated!
+[
+  {
+    "id chat": "string",
+    "name": "String",
+  }
+]
 ```
 
 ## Delete a chat by id
@@ -115,19 +125,74 @@ Chat updated!
 ```json
    Name   |  Type  |      Description                  
 -------------------------------------------------
-  id chat | string |  Required. Id of the chat 
+    id    | string |  Required. Id of the chat 
 ```
 
 ### Response
 
 ```json
-chat found!
------------------------------
 [
   {
+    "id": "String",
     "name": "String",
     "messages": "Message[]", 
     "users": "User[]"
   }
 ]
+```
+
+## Delete all chat
+
+`DELETE /api/chat/`
+
+### Body
+
+```json
+Confirm
+```
+
+### Response
+
+```json
+All chats removed
+```
+
+## Add a partecipant to a chat
+
+`POST /api/chat/:chatId/participant/:userId`
+
+### Parameters
+
+```json
+   Name    |  Type  |     Description                  
+-------------------------------------------------
+  chatId  | string |    Id of the chat
+-------------------------------------------------
+  userId  | string |    Id of the user
+```
+
+### Response
+
+```json
+Participant added to chat
+```
+
+## Remove a partecipant from a chat
+
+`DELETE /api/chat/:chatId/participant/:userId`
+
+### Parameters
+
+```json
+   Name    |  Type  |     Description                  
+-------------------------------------------------
+  chatId  | string |    Id of the chat
+-------------------------------------------------
+  userId  | string |    Id of the user
+```
+
+### Response
+
+```json
+Participant removed from chat
 ```
