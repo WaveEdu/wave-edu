@@ -7,9 +7,9 @@
 ### Body
 
 ```json
-| Name | Type   | Description                  |
-| :--- | :----- | :--------------------------- |
-| ownerId | string | Id of the ownerId |
+   Name    |  Type  |     Description                  
+-------------------------------------------------
+  ownerId  | string |    Id of the owner
 ```
 
 ### Response
@@ -22,7 +22,9 @@
     "messages": "Message[]", 
     "users": "User[]"
   }
-
+]
+------------------------------------
+[
   {
     "id chat": "string",
     "name": "String",
@@ -34,19 +36,21 @@
 
 ## Gets a chat by id
 
-`GET /api/chat:id`
+`GET /api/chat/:id`
 
 ### Parameters
 
 ```json
-   Name    |  Type  | Description                  
+   Name   |  Type  |      Description                  
 -------------------------------------------------
-  id chat | string | Required. Id of the chat 
+  id chat | string |  Required. Id of the chat 
 ```
 
 ### Response
 
 ```json
+chat found!
+-----------------------------
 [
   {
     "name": "String",
@@ -73,4 +77,57 @@
 ### Response
 
 ```json
-OK
+Chat created!
+```
+
+## Update a chat by id
+
+`PUT /api/chat/:id`
+
+### Parameters
+
+```json
+   Name    |  Type  |      Description                  
+-------------------------------------------------
+  id chat  | string |  Required. Id of the chat 
+```
+
+### Body
+
+```json
+   Name    |  Type  |     Description                  
+-------------------------------------------------
+   name    | string |   name of the chat
+```
+
+### Response
+
+```json
+Chat updated!
+```
+
+## Delete a chat by id
+
+`DELETE /api/chat/:id`
+
+### Parameters
+
+```json
+   Name   |  Type  |      Description                  
+-------------------------------------------------
+  id chat | string |  Required. Id of the chat 
+```
+
+### Response
+
+```json
+chat found!
+-----------------------------
+[
+  {
+    "name": "String",
+    "messages": "Message[]", 
+    "users": "User[]"
+  }
+]
+```
