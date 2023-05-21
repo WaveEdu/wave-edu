@@ -5,7 +5,6 @@ import {
     getUltimateMessagesOfChat,
     createMessage2,
     lastMessage,
-    createMessage,
     getMessageById,
     deleteMessage,
     removeAllMessagesChat,
@@ -45,24 +44,6 @@ export async function getMessageController(
       const message = await lastMessage(id);
   
       if (!message) return res.sendStatus(404);
-  
-      return res.status(200).json(message).end();
-    } catch (error) {
-      console.error(error);
-      res.sendStatus(500);
-    }
-  }
-
-  export async function postMessageController(
-    req: express.Request,
-    res: express.Response
-  ) {
-    try {
-      const { ownerId, content, messageType } = req.body;
-  
-      if (!ownerId || !content || !messageType) return res.sendStatus(400);
-  
-      const message = await createMessage(ownerId, content, messageType);
   
       return res.status(200).json(message).end();
     } catch (error) {
