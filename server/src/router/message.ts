@@ -3,7 +3,6 @@ import express from "express";
 import {
     getMessageController,
     getlastMessageController,
-    postMessageController,
     putMessageController,
     deleteMessageController,
     getMessagesController,
@@ -14,10 +13,9 @@ import {
 export default (router: express.Router) => {
     router.get("/message", getMessagesController);
     router.get("/message/:id", getMessageController);
-    router.get("/message/:id/last", getlastMessageController);
-    router.post("/message", postMessageController);
+    router.get("/message/last", getlastMessageController);
     router.put("/message/:id", putMessageController);
     router.delete("/message/:id", deleteMessageController);
     router.delete("/message", deleteMessagesController);
-    router.post("/message/create", postMessageController2);
+    router.post("/message", postMessageController2);
   };
