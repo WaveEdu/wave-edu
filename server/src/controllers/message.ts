@@ -1,5 +1,5 @@
 import express from "express";
-
+import Sondaggio from "@prisma/client";
 import {
     getMessagesOfChat,
     getUltimateMessagesOfChat,
@@ -89,7 +89,8 @@ export async function getMessageController(
         case "SONDAGGIO":
             const {question, options} = req.body
             if (!question || !options) return res.sendStatus(400);
-            const message2 = await createMessage2(ownerId, content, messageType, question, options);
+            let sondaggio:Sondaggio = {question:String, options:Array<String>}
+            const message2 = await createMessage2(ownerId, content, messageType, sondaggio);
             return res.status(200).json(message2).end(); 
         case "COMUNICAZIONE":
             const message = await createMessage2(ownerId, content, messageType);
