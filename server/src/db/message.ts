@@ -122,43 +122,6 @@ export async function lastMessage(chatID: string){
     return message;
   }
   
-export async function createMessage(chatId: string, content: string, messageType: MessageType) {
-    //   create chat
-    const newMessage = await prisma.message.create({
-      data: {
-        text: content,
-        messageType: messageType,
-        createdAt: new Date(Date.now()),
-        updatedAt: new Date(Date.now()),
-        Chat: {
-          connect: {
-            id: chatId,
-          },
-        },
-      },
-    });
-  
-    //   add message to chat
-    const updatedChat = await prisma.chat.update({
-      where: {
-        id: chatId,
-      },
-      data: {
-        messages: {
-          connect: {
-            id: newMessage.id,
-          },
-        },
-      },
-    });
-  
-    console.dir(newMessage, { depth: Infinity });
-    console.log("Message created!");
-    console.log("------------------");
-  
-    return newMessage.id;
-  }
-  
   export async function getMessageById(messageId: string) {
     const message = await prisma.message.findUnique({
       where: {
@@ -195,11 +158,10 @@ export async function createMessage(chatId: string, content: string, messageType
     console.log("All messages removed");
     console.log("------------------");
   }
-  export async function updateMessage(messageId: string, newText: string) {
+  export async function updateMessage(messageId: string) {
     const updatedMessage = await prisma.message.update({
       where: { id: messageId },
       data: {
-        text: newText,
         updatedAt: new Date()
       }
     });
