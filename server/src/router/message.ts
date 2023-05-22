@@ -13,7 +13,7 @@ import {
 export default (router: express.Router) => {
     router.get("/message", getMessagesController);
     router.get("/message/:id", getMessageController);
-    router.get("/message/last", getlastMessageController);
+    router.get("/lastmessage", getlastMessageController);
     router.put("/message/:id", putMessageController);
     router.delete("/message/:id", deleteMessageController);
     router.delete("/message", deleteMessagesController);

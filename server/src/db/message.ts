@@ -27,6 +27,7 @@ export async function getMessagesOfChat(chatId: string) {
     contentComunicazione?: Comunicazione
   ) {
     let data: any = {
+      ownerId: ownerId,
       messageType: messageType,
       createdAt: new Date(Date.now()),
       updatedAt: new Date(Date.now()),
@@ -34,11 +35,6 @@ export async function getMessagesOfChat(chatId: string) {
         connect: {
           id: chatId,
         },
-      },
-      User: {
-        connect: {
-          id : ownerId,
-        }
       }
     };
   
@@ -97,18 +93,7 @@ export async function getMessagesOfChat(chatId: string) {
     return newMessage.id;
   }
 
-export async function getUltimateMessagesOfChat(chatId: string) {
-    const message = await prisma.chat.findFirst({
-      where: {
-        id: chatId,
-      }
-    });
-  
-    console.dir(message, { depth: Infinity });
-    console.log("------------------");
-  
-    return message;
-  }
+
   
 export async function lastMessage(chatID: string){
     const message = await prisma.chat.findUnique({
@@ -158,17 +143,90 @@ export async function lastMessage(chatID: string){
     console.log("All messages removed");
     console.log("------------------");
   }
-  export async function updateMessage(messageId: string) {
-    const updatedMessage = await prisma.message.update({
-      where: { id: messageId },
-      data: {
-        updatedAt: new Date()
-      }
-    });
+  export async function updateMessage(
+    messageId: string,
+    messageType: MessageType,
+    // contentSpec: Lezione | Compito | Sondaggio | Evento,
+    contentLezione?: Lezione,
+    contentCompito?: Compito,
+    contentSondaggio?: Sondaggio,
+    contentEvento?: Evento,
+    contentComunicazione?: Comunicazione
+  ) {
+    let data: any = {
+      messageType: messageType,
+      updatedAt: new Date(Date.now()),
+    };
+    let newMessage;
+    switch (messageType) {
+      case MessageType.LEZIONE:
+        data.contentLezione = {
+          data: contentLezione?.data || new Date(Date.now()),
+          text: contentLezione?.text || "Lezione di Prova",
+        };
+        newMessage = await prisma.message.update({
+          where: {
+            id: messageId,
+          },
+          data
+        });
+        break;
+      case MessageType.COMPITO:
+        data.contentCompito = {
+          data: contentCompito?.data || new Date(Date.now()),
+          text: contentCompito?.text || "Compito di Prova",
+        };
+        newMessage = await prisma.message.update({
+          where: {
+            id: messageId,
+          },
+          data
+        });
+        break;
+      case MessageType.SONDAGGIO:
+        data.contentSondaggio = {
+          question: contentSondaggio?.question || "",
+          options: contentSondaggio?.options || [],
+        };
+        newMessage = await prisma.message.update({
+          where: {
+            id: messageId,
+          },
+          data
+        });
+        break;
+      case MessageType.EVENTO:
+        data.contentEvento = {
+          data: contentEvento?.data || new Date(Date.now()),
+          text: contentEvento?.text || "Evento di Prova",
+        };
+        newMessage = await prisma.message.update({
+          where: {
+            id: messageId,
+          },
+          data
+        });
+        break;
+        case MessageType.COMUNICAZIONE:
+          data.contentComunicazione = {
+            comunicazione: contentComunicazione?.comunicazione || "Comunicazione di Prova",
+          };
+          newMessage = await prisma.message.update({
+            where: {
+              id: messageId,
+            },
+            data
+          });
+          break;
+    default:
+        break;
+    }
+  
+    
 
-    console.dir(updatedMessage, { depth: Infinity });
+    console.dir(newMessage, { depth: Infinity });
     console.log("Message Update!");
     console.log("------------------");
 
-    return updatedMessage;
+    return newMessage?.id;
   }

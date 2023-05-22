@@ -8,7 +8,6 @@ import {
 } from "@prisma/client";
 import {
   getMessagesOfChat,
-  getUltimateMessagesOfChat,
   createMessage2,
   lastMessage,
   getMessageById,
@@ -42,11 +41,11 @@ export async function getlastMessageController(
   res: express.Response
 ) {
   try {
-    const { id } = req.params;
+    const { ChatId } = req.body;
 
-    if (!id) return res.sendStatus(400);
+    if (!ChatId) return res.sendStatus(400);
 
-    const message = await lastMessage(id);
+    const message = await lastMessage(ChatId);
 
     if (!message) return res.sendStatus(404);
 
@@ -153,14 +152,84 @@ export async function putMessageController(
   res: express.Response
 ) {
   try {
-    const { name } = req.body;
-    const { id } = req.params;
-
-    if (!id) return res.sendStatus(400);
-
-    const message = await updateMessage(id);
-
-    return res.status(200).json(message).end();
+    const {id} = req.params;
+    const messageId = id;
+    if(!messageId) return res.send({"error": "no parameter provided"}).sendStatus(400)
+    const { messageType } = req.body;
+    if (!messageType) return res.sendStatus(400);
+    switch (messageType) {
+      case "LEZIONE":
+      case "COMPITO":
+      case "EVENTO":
+        const { data, text } = req.body;
+        if (!data || !text) return res.sendStatus(400);
+        if (messageType == "LEZIONE") {
+          let oggetto: Lezione = { data, text };
+          const message1 = await updateMessage(
+            messageId,
+            messageType,
+            oggetto,
+            undefined,
+            undefined,
+            undefined,
+            undefined
+          );
+          return res.status(200).json(message1).end();
+        } else if (messageType == "COMPITO") {
+          let oggetto: Compito = { data, text };
+          const message1 = await updateMessage(
+            messageId,
+            messageType,
+            undefined,
+            oggetto,
+            undefined,
+            undefined,
+            undefined
+          );
+          return res.status(200).json(message1).end();
+        } else {
+          let oggetto: Evento = { data, text };
+          const message1 = await updateMessage(
+            messageId,
+            messageType,
+            undefined,
+            undefined,
+            undefined,
+            oggetto,
+            undefined
+          );
+          return res.status(200).json(message1).end();
+        }
+      case "SONDAGGIO":
+        const { question, options } = req.body;
+        if (!question || !options) return res.send({"error": "not enopugh argumentss"});
+        let sondaggio: Sondaggio = { question, options };
+        const message2 = await updateMessage(
+          messageId,
+          messageType,
+          undefined,
+          undefined,
+          sondaggio,
+          undefined
+        );
+        return res.status(200).json(message2).end();
+      case "COMUNICAZIONE":
+        const { comunicazione } = req.body;
+        if (!comunicazione) return res.sendStatus(400);
+        let oggetto: Comunicazione = { comunicazione };
+        const message = await updateMessage(
+          messageId,
+          messageType,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          oggetto
+        );
+        return res.status(200).json(message).end();
+      default:
+        return res.sendStatus(400);
+    }
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
