@@ -96,7 +96,7 @@ In dev mode server restarts automatically every time you save a file.
    6. add the routes in `src/routes/index.ts`
 3. Test your feature
 
-## Run a demo
+## Demo 1
 
 Using Postman or Insomnia, send a `POST` request to `https://wave-edu-server.onrender.com/api/auth/link` with the following body:
 
@@ -141,3 +141,40 @@ Then you can try to access the protected routes. Run a `GET` request to `https:/
   }
 ]
 ```
+
+## Demo 2
+
+Using Postman or Insomnia, send a `POST` request to `https://wave-edu-server.onrender.com/api/user` to create a new user with the following body:
+
+```json
+{
+  "email": "email@example.com",
+  "name": "John Doe",
+  "role": "TEACHER"
+}
+```
+
+Then, send a `POST` request to `https://wave-edu-server.onrender.com/api/chat` to create a new chat with the following body:
+
+```json
+{
+  "ownerId": <ownerId returned before>,
+   "name": "Chat name"
+}
+```
+
+Then, send a `POST` request to `https://wave-edu-server.onrender.com/api/message` to create a new message with the following body:
+
+```json
+{
+  "ownerId": "the one before",
+  "chatId": "the one returne earlier",
+  "messageType": "LEZIONE", // see the docs for other message types
+  "data": "2023-05-20T17:21:15.361+00:00", // ISO date
+  "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas quis diam euismod, feugiat dolor sit amet, ultricies leo."
+}
+```
+
+> other message type are available (see the [Docs](../server/src/docs/message.md))
+
+Then, you can send a `DELETE` request to `https://wave-edu-server.onrender.com/api/message/:id` to delete the message.
