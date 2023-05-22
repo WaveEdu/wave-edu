@@ -65,7 +65,7 @@
 ```
 ## Get last messages in a chat
 
-`GET /api/message/last`
+`GET /api/lastmessage`
 
 ### Body
 
