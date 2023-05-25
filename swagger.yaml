@@ -20,8 +20,6 @@ paths:
       parameters:
         - name: body
           in: body
-          description: User object
-          required: true
           schema:
             type: object
             properties:
@@ -29,26 +27,41 @@ paths:
                 type: string
               name:
                 type: string
-              userType:
+              role:
                 type: string
       responses:
         "201":
-          description: Created 
+          description: Successfully Created
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              email:
+                type: string
+              name:
+                type: string
+              role:
+                type: string
     get:
       tags:
         - User
       summary: Get all users
+      security:
+        - teacher: []
       responses:
         "200":
           description: Successful Response
           schema:
             type: object
             properties:
+              id:
+                type: string
               email:
                 type: string
               name:
                 type: string
-              userType:
+              role:
                 type: string
 
     delete:
@@ -61,7 +74,7 @@ paths:
         "204":
           description: No Content
           
-  /user/{id}:
+  /user/:{id}:
     get:
       tags:
         - User
@@ -74,7 +87,18 @@ paths:
           type: string
       responses:
         "200":
-          description: OK
+          description: user found successfully
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              email:
+                type: string
+              name:
+                type: string
+              role:
+                type: string
     put:
       tags:
         - User
