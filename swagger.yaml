@@ -30,7 +30,7 @@ paths:
               role:
                 type: string
       security:
-        - teacher: []
+        - Admin: []
       responses:
         "201":
           description: Successfully Created
@@ -71,7 +71,7 @@ paths:
         - User
       summary: Delete all users
       security:
-        - teacher: []
+        - Admin: []
       responses:
         "204":
           description: No Content
@@ -88,7 +88,7 @@ paths:
           required: true
           type: string
       security:
-        - teacher: []
+        - Admin: []
       responses:
         "200":
           description: user found successfully
@@ -125,7 +125,7 @@ paths:
               role:
                 type: string
       security:
-        - teacher: []
+        - Admin: []
       responses:
         "200":
           description: user updated successfully
@@ -151,7 +151,7 @@ paths:
           required: true
           type: string
       security:
-        - teacher: []
+        - Admin: []
       responses:
         "204":
           description: user removed successfully
@@ -332,3 +332,8 @@ securityDefinitions:
     name: Authorization
     in: header
     description: Requires teacher authorization to access this endpoint.
+  Admin:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Requires Admin authorization to access this endpoint
