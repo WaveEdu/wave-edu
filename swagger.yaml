@@ -29,6 +29,8 @@ paths:
                 type: string
               role:
                 type: string
+      security:
+        - teacher: []
       responses:
         "201":
           description: Successfully Created
@@ -85,6 +87,8 @@ paths:
           description: ID of user to retrieve
           required: true
           type: string
+      security:
+        - teacher: []
       responses:
         "200":
           description: user found successfully
@@ -120,6 +124,8 @@ paths:
                 type: string
               role:
                 type: string
+      security:
+        - teacher: []
       responses:
         "200":
           description: user updated successfully
@@ -144,6 +150,8 @@ paths:
           description: ID of user to delete
           required: true
           type: string
+      security:
+        - teacher: []
       responses:
         "204":
           description: user removed successfully
@@ -174,6 +182,8 @@ paths:
                 type: string
               name:
                 type: string
+      security:
+        - teacher: []
       responses:
         "201":
           description: Successfully Created
@@ -276,6 +286,8 @@ paths:
             properties:
               name:
                 type: string
+      security:
+        - teacher: []
       responses:
         "200":
           description: chat updated successfully
@@ -296,6 +308,8 @@ paths:
           description: ID of chat to delete
           required: true
           type: string
+      security:
+        - teacher: []
       responses:
         "204":
           description: chat removed successfully
