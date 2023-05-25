@@ -50,7 +50,7 @@ paths:
         - User
       summary: Get all users
       security:
-        - teacher: []
+        - Admin: []
       responses:
         "200":
           description: Successful Response
