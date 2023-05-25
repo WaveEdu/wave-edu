@@ -109,9 +109,31 @@ paths:
           description: ID of user to update
           required: true
           type: string
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              name:
+                type: string
+              role:
+                type: string
       responses:
         "200":
-          description: OK
+          description: user updated successfully
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              email:
+                type: string
+              name:
+                type: string
+              role:
+                type: string
     delete:
       tags:
         - User
@@ -124,8 +146,172 @@ paths:
           type: string
       responses:
         "204":
-          description: No Content          
-          
+          description: user removed successfully
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              email:
+                type: string
+              name:
+                type: string
+              role:
+                type: string  
+
+  /chat:
+    post:
+      tags:
+        - Chat
+      summary: Create a new chat
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              ownerId:
+                type: string
+              name:
+                type: string
+      responses:
+        "201":
+          description: Successfully Created
+          schema:
+            type: object
+            properties:
+              id chat:
+                type: string
+              name:
+                type: string
+              message:
+                type: array
+              users:
+                type: array
+    get:
+      tags:
+        - Chat
+      summary: Get all chats
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+               id owner:
+                 type: string
+      security:
+        - teacher: []
+      responses:
+        "200":
+          description: Chat Acquired Successfully 
+          schema:
+            type: object
+            properties:
+              id chat:
+                type: string
+              name:
+                type: string
+              message:
+                type: array
+              users:
+                type: array
+    delete:
+      tags:
+        - Chat
+      summary: Delete all chats
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+               Confirm:
+                 type: string
+      security:
+        - teacher: []
+      responses:
+        "204":
+          description: All chats removed
+    
+  /chat/:{id}:
+     get:
+      tags:
+        - Chat
+      summary: Get chats by ID
+      parameters:
+        - name: id
+          in: path
+          description: ID of the chat
+          required: true
+          type: string
+      security:
+        - teacher: []
+      responses:
+        "200":
+          description: Chats Acquired Successfully 
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              message:
+                type: array
+              users:
+                type: array
+     put:
+      tags:
+        - Chat
+      summary: Update chat by ID
+      parameters:
+        - name: id
+          in: path
+          description: ID of chat to update
+          required: true
+          type: string
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+      responses:
+        "200":
+          description: chat updated successfully
+          schema:
+            type: object
+            properties:
+              id chat:
+                type: string
+              name:
+                type: string
+     delete:
+      tags:
+        - Chat
+      summary: Delete chat by ID
+      parameters:
+        - name: id
+          in: path
+          description: ID of chat to delete
+          required: true
+          type: string
+      responses:
+        "204":
+          description: chat removed successfully
+          schema:
+            type: object
+            properties:
+              id chat:
+                type: string
+              name:
+                type: string
+              message:
+                type: array
+              users:
+                type: array 
+
+  
 securityDefinitions:
   teacher:
     type: apiKey
