@@ -12,6 +12,60 @@ consumes:
 produces:
 - application/json
 paths:
+  /auth/link:
+    post:
+      tags:
+        - Authentication
+      summary: Create a link to connect
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+      security:
+        - Admin: []
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                
+  /auth/login:
+    get:
+      tags:
+        - Authentication
+      summary: Login
+      parameters:
+      - name: body
+        in: body
+        schema:
+            type: object
+            properties:
+              token:
+                type: string
+                description: Required
+      security:
+        - Admin: []
+      responses:
+        "200":
+          description: OK
+        
+  /auth/logout:
+    delete:
+      tags:
+        - Authentication
+      summary: logout
+      security:
+        - Admin: []
+      responses:
+        "200":
+          description: OK
   /user:
     post:
       tags:
