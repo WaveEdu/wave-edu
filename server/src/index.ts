@@ -11,7 +11,14 @@ import router from "./router";
 dotenv.config();
 const app = express();
 
-app.use(cors({ credentials: true }));
+// Set the HTTP header Access-Control-Allow-Credentials value to true.
+// Make sure the HTTP headers Access-Control-Allow-Origin and Access-Control-Allow-Headers are set. Don't use a wildcard *. When you set the allowed origin make sure to use the entire origin including the scheme, i.e. http is not same as https in CORS.
+app.use(
+  cors({
+    origin: process.env.DEPLOY_URL_CLIENT ?? "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 app.use(compression());
 app.use(cookieParser());
