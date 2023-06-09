@@ -1,4 +1,11 @@
 import express from "express";
+
+import {
+  isAuthenticated,
+  isTeacher,
+  isStudent
+} from "../middlewares";
+
 import {
     getStory,
     createStory,
@@ -36,7 +43,7 @@ export async function getStoryController(
       const { ownerId, filePath, deleteDate } = req.body;
   
       if (!ownerId || !filePath || !deleteDate) return res.sendStatus(400);
-  
+      if(!isTeacher) return res.sendStatus(403);
       const story = await createStory(ownerId, filePath, deleteDate);
   
       return res.status(200).json(story).end();
@@ -55,7 +62,7 @@ export async function getStoryController(
       const { id } = req.params;
   
       if (!id) return res.sendStatus(400);
-  
+      if(!isTeacher) return res.sendStatus(403);
       const chat = await updateStory2(id, filePath, deleteDate);
   
       return res.status(200).json(chat).end();
@@ -73,7 +80,7 @@ export async function getStoryController(
       const { id } = req.params;
   
       if (!id) return res.sendStatus(400);
-  
+      if(!isTeacher) return res.sendStatus(403);
       const chat = await deleteStory(id);
   
       return res.status(200).json(chat).end();
