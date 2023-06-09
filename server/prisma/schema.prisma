@@ -50,7 +50,7 @@ model Message {
   contentComunicazione Comunicazione?
 }
 
-model Stories {
+model Story {
   id          String      @id @default(auto()) @map("_id") @db.ObjectId
   ownerId      String      @db.ObjectId
   filePath   String

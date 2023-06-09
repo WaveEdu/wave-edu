@@ -1,4 +1,4 @@
-import { PrismaClient, Story, User, UserType, MessageType, Lezione, Compito, Sondaggio, Evento, Comunicazione} from "@prisma/client";
+import { PrismaClient, User, UserType, MessageType, Lezione, Compito, Sondaggio, Evento, Comunicazione} from "@prisma/client";
 
 const prisma = new PrismaClient();
 
