@@ -2,10 +2,10 @@
 	import Phone from '../components/Phone.svelte';
 	import ThemeToggle from '../components/ThemeToggle.svelte';
 	let chatTitle = 'Chat';
-	let nameApp = 'WaveWdu';
+	let nameApp = 'WaveEdu';
 </script>
 
-<h1 class="text-3xl font-bold underline">{nameApp}veEdu</h1>
+<h1 class="text-3xl font-bold underline">{nameApp}</h1>
 <p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
 
 <button class="btn btn-neutral">Neutral</button>
@@ -25,8 +25,7 @@
 					<div class="avatar">
 						<div class="w-10 rounded-xl">
 							<img
-							src={`https://api.dicebear.com/6.x/initials/svg?seed=${nameApp}`}
-							alt={nameApp}
+							src={'https://www.figma.com/file/tkf9qniauAJcAbHwEiHtdv/Logo-e-Mockup?type=design&node-id=50-6340&t=lmSWYFbWdq2Xzi3Q-4'}
 							/>
 						</div>
 					  </div>
@@ -50,7 +49,47 @@
 				</div>
 			</div>
 		</header>
-		<main class="flex h-full flex-col justify-end">
+		<main class="flex h-max  flex-col justify-start  ">
+			<!-- Stories --> 
+			<!-- devo capire come inserire le stories ()-->
+			<div class="carousel carousel-center max-w-md p-4 space-x-4 bg-neutral rounded-box">
+				<div class="carousel-item">
+				  <img src="/images/stock/photo-1559703248-dcaaec9fab78.jpg" class="rounded-box" />
+				</div> 
+				<div class="carousel-item">
+				  <img src="/images/stock/photo-1565098772267-60af42b81ef2.jpg" class="rounded-box" />
+				</div> 
+				<div class="carousel-item">
+				  <img src="/images/stock/photo-1572635148818-ef6fd45eb394.jpg" class="rounded-box" />
+				</div> 
+				<div class="carousel-item">
+				  <img src="/images/stock/photo-1494253109108-2e30c049369b.jpg" class="rounded-box" />
+				</div> 
+				<div class="carousel-item">
+				  <img src="/images/stock/photo-1550258987-190a2d41a8ba.jpg" class="rounded-box" />
+				</div> 
+				<div class="carousel-item">
+				  <img src="/images/stock/photo-1559181567-c3190ca9959b.jpg" class="rounded-box" />
+				</div> 
+				<div class="carousel-item">
+				  <img src="/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" class="rounded-box" />
+				</div>
+				<div class="carousel-item">
+					<img src="/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" class="rounded-box" />
+				</div>
+				 <div class="carousel-item">
+					<img src="/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" class="rounded-box" />
+				</div>
+				<div class="carousel-item">
+					<img src="/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" class="rounded-box" />
+				</div>
+				<div class="carousel-item">
+					<img src="/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" class="rounded-box" />
+				</div>
+				<div class="carousel-item">
+					<img src="/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" class="rounded-box" />
+				</div>
+			  </div>
 			<div class="chat chat-start">
 				<div class="chat-header">Professor Oak</div>
 				<div class="chat-bubble">Pokémon around the world wait for you!</div>
