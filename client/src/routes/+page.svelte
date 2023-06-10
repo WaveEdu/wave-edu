@@ -20,6 +20,22 @@
 <Phone>
 	<div class="flex h-full w-full flex-col">
 		<header>
+			<div class="mx-2 mt-28 flex flex-1 flex-row gap-2">
+				<h1 class="inline-block text-6xl normal-case">Login</h1>
+
+			</div>
+		</header>
+		<main> 
+			<div class="mx-2 mt-5 join">
+				<input class="input join-item rounded-sm outline" placeholder="Email"/>
+			</div>
+		</main>
+	</div>
+</Phone>
+
+<Phone>
+	<div class="flex h-full w-full flex-col">
+		<header>
 			<div class="navbar bg-base-100 space-x-2">
 				<div class="my-6 flex flex-1 flex-row gap-2">
 					<div class="avatar">
@@ -49,64 +65,50 @@
 				</div>
 			</div>
 		</header>
-		<main class="flex h-max  flex-col justify-start  ">
+		<main class="flex h-full flex-col justify-start">
 			<!-- Stories --> 
-			<!-- devo capire come inserire le stories ()-->
-			<div class="carousel carousel-center max-w-md p-4 space-x-4 bg-neutral rounded-box">
-				<div class="carousel-item">
-				  <img src="/images/stock/photo-1559703248-dcaaec9fab78.jpg" class="rounded-box" />
-				</div> 
-				<div class="carousel-item">
-				  <img src="/images/stock/photo-1565098772267-60af42b81ef2.jpg" class="rounded-box" />
-				</div> 
-				<div class="carousel-item">
-				  <img src="/images/stock/photo-1572635148818-ef6fd45eb394.jpg" class="rounded-box" />
-				</div> 
-				<div class="carousel-item">
-				  <img src="/images/stock/photo-1494253109108-2e30c049369b.jpg" class="rounded-box" />
-				</div> 
-				<div class="carousel-item">
-				  <img src="/images/stock/photo-1550258987-190a2d41a8ba.jpg" class="rounded-box" />
-				</div> 
-				<div class="carousel-item">
-				  <img src="/images/stock/photo-1559181567-c3190ca9959b.jpg" class="rounded-box" />
-				</div> 
-				<div class="carousel-item">
-				  <img src="/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" class="rounded-box" />
-				</div>
-				<div class="carousel-item">
-					<img src="/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" class="rounded-box" />
-				</div>
-				 <div class="carousel-item">
-					<img src="/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" class="rounded-box" />
-				</div>
-				<div class="carousel-item">
-					<img src="/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" class="rounded-box" />
-				</div>
-				<div class="carousel-item">
-					<img src="/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" class="rounded-box" />
-				</div>
-				<div class="carousel-item">
-					<img src="/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" class="rounded-box" />
-				</div>
-			  </div>
-			<div class="chat chat-start">
-				<div class="chat-header">Professor Oak</div>
-				<div class="chat-bubble">Pokémon around the world wait for you!</div>
-				<div class="chat-footer opacity-50">
-					<time class="text-xs opacity-50">2 hours ago</time>
-				</div>
-			</div>
-			<div class="chat chat-end">
-				<div class="chat-header">Professor Oak</div>
-				<div class="chat-bubble">Thanks 😃</div>
-				<div class="chat-footer opacity-50">
-					<time class="text-xs">now</time>
-				</div>
-			</div>
+            <!-- devo capire come inserire le stories ()-->
+            <div class="carousel carousel-center max-w-md p-4 space-x-4 bg-neutral rounded-box">
+                <div class="carousel-item">
+                  <img src="/images/stock/photo-1559703248-dcaaec9fab78.jpg" class="rounded-box" />
+                </div> 
+                <div class="carousel-item">
+                  <img src="/images/stock/photo-1565098772267-60af42b81ef2.jpg" class="rounded-box" />
+                </div> 
+                <div class="carousel-item">
+                  <img src="/images/stock/photo-1572635148818-ef6fd45eb394.jpg" class="rounded-box" />
+                </div> 
+                <div class="carousel-item">
+                  <img src="/images/stock/photo-1494253109108-2e30c049369b.jpg" class="rounded-box" />
+                </div> 
+                <div class="carousel-item">
+                  <img src="/images/stock/photo-1550258987-190a2d41a8ba.jpg" class="rounded-box" />
+                </div> 
+                <div class="carousel-item">
+                  <img src="/images/stock/photo-1559181567-c3190ca9959b.jpg" class="rounded-box" />
+                </div> 
+                <div class="carousel-item">
+                  <img src="/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" class="rounded-box" />
+                </div>
+                <div class="carousel-item">
+                    <img src="/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" class="rounded-box" />
+                </div>
+                 <div class="carousel-item">
+                    <img src="/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" class="rounded-box" />
+                </div>
+                <div class="carousel-item">
+                    <img src="/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" class="rounded-box" />
+                </div>
+                <div class="carousel-item">
+                    <img src="/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" class="rounded-box" />
+                </div>
+                <div class="carousel-item">
+                    <img src="/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" class="rounded-box" />
+                </div>
+              </div>
 		</main>
 		<footer>
-			<div class="mx-28 my-2 flex flex-row gap-20">
+			<div class="footer mx-28 my-2 flex flex-row gap-20">
 				<button>
 				  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
 				</button>
