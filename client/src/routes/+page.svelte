@@ -1,10 +1,10 @@
 <script>
 	import Phone from '../components/Phone.svelte';
 	import ThemeToggle from '../components/ThemeToggle.svelte';
-	let chatTitle = 'Pokemon Chat';
+	let chatTitle = 'Chat';
 </script>
 
-<h1 class="text-3xl font-bold underline">Hello world!</h1>
+<h1 class="text-3xl font-bold underline">Wave Edu</h1>
 <p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
 
 <button class="btn btn-neutral">Neutral</button>
@@ -15,6 +15,83 @@
 <button class="btn btn-link">Link</button>
 
 <ThemeToggle />
+
+<Phone>
+	<div class="flex h-full w-full flex-col">
+		<header>
+			<div class="navbar bg-base-100 space-x-2">
+				<div class="flex-none">
+					<a href="/" class="btn btn-square btn-ghost">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="1em"
+							height="1em"
+							viewBox="0 0 24 24"
+							class="inline-block h-5 w-5 stroke-current"
+							><path
+								fill="currentColor"
+								d="M20.25 12a.75.75 0 0 1-.75.75H6.31l5.47 5.47a.75.75 0 1 1-1.06 1.06l-6.75-6.75a.75.75 0 0 1 0-1.06l6.75-6.75a.75.75 0 1 1 1.06 1.06l-5.47 5.47H19.5a.75.75 0 0 1 .75.75Z"
+							/></svg
+						>
+					</a>
+				</div>
+				<div class="flex flex-1 flex-row gap-2">
+					<div class="avatar">
+						<div class="mask mask-squircle w-10">
+							<img
+								src={`https://api.dicebear.com/6.x/initials/svg?seed=${chatTitle}`}
+								alt={chatTitle}
+							/>
+						</div>
+					</div>
+					<h1 class="inline-block text-xl normal-case">{chatTitle}</h1>
+				</div>
+				<div class="flex-none">
+					<button class="btn btn-square btn-ghost">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							class="inline-block h-5 w-5 stroke-current"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
+							/></svg
+						>
+					</button>
+				</div>
+			</div>
+		</header>
+		<main class="flex h-full flex-col justify-end">
+			<div class="chat chat-start">
+				<div class="chat-header">Professor Oak</div>
+				<div class="chat-bubble">Pokémon around the world wait for you!</div>
+				<div class="chat-footer opacity-50">
+					<time class="text-xs opacity-50">2 hours ago</time>
+				</div>
+			</div>
+			<div class="chat chat-end">
+				<div class="chat-header">Professor Oak</div>
+				<div class="chat-bubble">Thanks 😃</div>
+				<div class="chat-footer opacity-50">
+					<time class="text-xs">now</time>
+				</div>
+			</div>
+		</main>
+		<footer>
+			<div class="mx-28 my-2 flex flex-row gap-20">
+				<button>
+				  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+				</button>
+				<button class="active">
+				  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+				</button>
+			</div>
+		</footer>
+	</div>
+</Phone>
 
 <Phone>
 	<div class="flex h-full w-full flex-col">
@@ -107,4 +184,3 @@
 		</footer>
 	</div>
 </Phone>
-
