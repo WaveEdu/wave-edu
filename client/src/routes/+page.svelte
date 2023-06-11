@@ -1,4 +1,5 @@
-<script>
+<script lang="ts">
+	import { PUBLIC_DEPLOY_URL_SERVER } from '$env/static/public';
 	import Phone from '../components/Phone.svelte';
 	import AvatarProfilo from '../components/avatarProfilo.svelte';
 	import BarraCSopra from '../components/barraCSopra.svelte';
@@ -15,11 +16,39 @@
 	import Warning from '../components/warning.svelte';
 	let chatTitle = 'Chat';
 	let nameApp = 'WaveEdu';
+
+	import ThemeToggle from '../components/ThemeToggle.svelte';
+	let email = '';
+	let loading = false;
+	let successMessage = '';
+	let errorMessage = '';
+
+	const handleSubmit = async (event: SubmitEvent) => {
+		event.preventDefault();
+		loading = true;
+		
+		const response = await fetch(`${PUBLIC_DEPLOY_URL_SERVER}/api/auth/link`, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ email })
+		});
+
+		const { message, cookieToken } = await response.json();
+
+		if (message) {
+			successMessage =
+			'A Magic Link has been sent to your email address. Please click it to log in.';
+			document.cookie = `node-magic-link-check=${cookieToken}; path=/;`;
+		} else {
+			errorMessage = 'An error occurred. Please try again later.';
+			loading = false;
+			return;
+		}
+		loading = false;
+	};
 </script>
 
 <h1 class="text-3xl font-bold underline">{nameApp}</h1>
-
-
 <button class="btn btn-neutral">Neutral</button>
 <button class="btn btn-primary">Primary</button>
 <button class="btn btn-secondary">Secondary</button>
@@ -116,3 +145,24 @@
 		</main> 
 	</div>
 </Phone>
+<main>
+	{#if successMessage}
+		<p>{successMessage}</p>
+	{:else if errorMessage}
+		<p>{errorMessage}</p>
+	{:else}
+		<form on:submit={handleSubmit}>
+			<label>
+				Email:
+				<input type="email" bind:value={email} required />
+			</label>
+			<button type="submit" disabled={loading}>
+				{#if loading}
+					Loading...
+				{:else}
+					Send Magic Link
+				{/if}
+			</button>
+		</form>
+	{/if}
+</main>

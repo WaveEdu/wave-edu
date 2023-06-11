@@ -4,6 +4,7 @@ import user from "./user";
 import chat from "./chat";
 import message from "./message"
 import authentication from "./authentication";
+import story from "./story";
 
 const router = express.Router();
 
@@ -12,6 +13,7 @@ export default (): express.Router => {
   chat(router);
   message(router)
   authentication(router);
+  story(router);
   // add more routers here
   return router;
 };

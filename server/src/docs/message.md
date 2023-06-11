@@ -48,7 +48,7 @@
 
 | Name | Type   | Description                  |
 | :--- | :----- | :--------------------------- |
-| id   | string | **Required**. Id of the chat |
+| id   | string | **Required**. Id of the message |
 
 ### Response
 
@@ -235,7 +235,7 @@
 
 | Name | Type   | Description                  |
 | :--- | :----- | :--------------------------- |
-| id   | string | **Required**. Id of the user |
+| id   | string | **Required**. Id of the message |
 
 ### Body
 
@@ -376,7 +376,7 @@
 
 | Name | Type   | Description                  |
 | :--- | :----- | :--------------------------- |
-| id   | string | **Required**. Id of the user |
+| id   | string | **Required**. Id of the message |
 
 ### Response
 
