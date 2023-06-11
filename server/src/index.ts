@@ -15,7 +15,7 @@ const app = express();
 // Make sure the HTTP headers Access-Control-Allow-Origin and Access-Control-Allow-Headers are set. Don't use a wildcard *. When you set the allowed origin make sure to use the entire origin including the scheme, i.e. http is not same as https in CORS.
 app.use(
   cors({
-    origin: process.env.DEPLOY_URL_CLIENT ?? "http://localhost:5173",
+    origin: process.env.PUBLIC_DEPLOY_URL_CLIENT ?? "http://localhost:5173",
     credentials: true,
   })
 );
@@ -29,7 +29,7 @@ const server = http.createServer(app);
 server.listen(process.env.API_PORT ?? 3000, () =>
   console.log(`
 🚀 Server ready at: ${
-    process.env.DEPLOY_URL_SERVER ??
+    process.env.PUBLIC_DEPLOY_URL_SERVER ??
     "http://localhost:" + process.env.API_PORT ??
     3000
   }/api,\n😄 if you reached this point everything should work`)
