@@ -50,6 +50,13 @@ model Message {
   contentComunicazione Comunicazione?
 }
 
+model Story {
+  id          String      @id @default(auto()) @map("_id") @db.ObjectId
+  ownerId      String      @db.ObjectId
+  filePath   String
+  deleteDate DateTime     
+}
+
 enum MessageType {
   LEZIONE
   COMPITO

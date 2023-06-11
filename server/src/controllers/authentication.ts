@@ -46,9 +46,7 @@ export async function postAuthLinkController(
     }
 
     const token = randomToken();
-    const link = `${
-      req.protocol + "://" + req.get("host")
-    }/api/auth/login?token=${token}`;
+    const link = `${process.env.PUBLIC_DEPLOY_URL_CLIENT}/api/auth/login?token=${token}`;
 
     // Validity limit
     const validUntil = new Date(Date.now() + 15 * 60 * 1000); // in 15 minutes
@@ -135,7 +133,7 @@ export async function getAuthLoginController(
 
     // redirect to the home page
     console.log("Login success!");
-    res.redirect(`${process.env.DEPLOY_URL_CLIENT}/dashboard`);
+    res.redirect(`${process.env.DEPLOY_URL_CLIENT}/chat`);
     // res
     //   .status(200)
     //   .json({ message: "Login success!", sessionToken: magicLink.token });
