@@ -8,30 +8,53 @@ generator client {
 }
 
 model User {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  email    String   @unique
-  name     String
-  userType UserType
-  chatIDs  String[] @db.ObjectId
-  chats    Chat[]   @relation(fields: [chatIDs], references: [id])
+  id         String      @id @default(auto()) @map("_id") @db.ObjectId
+  email      String      @unique
+  name       String
+  userType   UserType
+  chatIDs    String[]    @db.ObjectId
+  chats      Chat[]      @relation(fields: [chatIDs], references: [id])
+  magicLinks MagicLink[]
+}
+
+model MagicLink {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  token       String
+  cookieToken String
+  userId      String   @db.ObjectId
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  validUntil  DateTime
+  isUsed      Boolean  @default(false)
 }
 
 model Chat {
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
   name     String
-  messages Message[]
+  messages Message[] 
   userIDs  String[]  @db.ObjectId
   users    User[]    @relation(fields: [userIDs], references: [id])
 }
 
 model Message {
   id          String      @id @default(auto()) @map("_id") @db.ObjectId
-  text        String
   messageType MessageType
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
-  Chat        Chat?       @relation(fields: [chatId], references: [id])
-  chatId      String?     @db.ObjectId
+  Chat        Chat        @relation(fields: [chatId], references: [id], onDelete: Cascade, onUpdate: Cascade) 
+  chatId      String      @db.ObjectId
+  ownerId      String      @db.ObjectId
+  contentLezione Lezione?
+  contentCompito Compito?
+  contentSondaggio Sondaggio?
+  contentEvento Evento?
+  contentComunicazione Comunicazione?
+}
+
+model Story {
+  id          String      @id @default(auto()) @map("_id") @db.ObjectId
+  ownerId      String      @db.ObjectId
+  filePath   String
+  deleteDate DateTime     
 }
 
 enum MessageType {
@@ -46,4 +69,24 @@ enum UserType {
   STUDENT
   TEACHER
   ADMIN
+}
+
+type Lezione {
+  data DateTime @default(now())
+  text String
+}
+type Compito {
+  data DateTime @default(now())
+  text String
+}
+type Sondaggio {
+  question String 
+  options String[]
+}
+type Evento {
+  data DateTime @default(now())
+  text String
+}
+type Comunicazione {
+  comunicazione String
 }

@@ -1,0 +1,3 @@
+# dockerignore for a node project
+node_modules/
+data/

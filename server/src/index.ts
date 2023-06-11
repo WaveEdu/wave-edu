@@ -1,38 +1,30 @@
 import express from "express";
-import * as user from "./user";
-import * as chat from "./chat";
+import dotenv from "dotenv";
+import http from "http";
+import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
+import compression from "compression";
+import cors from "cors";
 
+import router from "./router";
+
+dotenv.config();
 const app = express();
 
-app.use(express.json());
+app.use(cors({ credentials: true }));
 
-app.get(`/user/:id`, async (req, res) => {
-  const { id } = req.params;
-  const data = await user.readUser(id);
-  res.json(data);
-});
+app.use(compression());
+app.use(cookieParser());
+app.use(bodyParser.json());
 
-app.post(`/user`, async (req, res) => {
-  const { email, name, userType } = req.body;
-  const data = await user.createUser(email, name, userType);
-  await console.log(data);
-  res.json(data);
-});
+const server = http.createServer(app);
 
-app.get("/", (req, res) => {
-  res.json({ message: "It is alive!" });
-});
-
-const server = app.listen(3000, () =>
+server.listen(process.env.API_PORT ?? 3000, () =>
   console.log(`
-🚀 Server ready at: http://localhost:3000,\n😄 if you reached this point everything should work`)
+🚀 Server ready at: ${process.env.DEPLOY_URL ?? "http:localhost"}:${
+    process.env.API_PORT ?? 3000
+  }/api,\n😄 if you reached this point everything should work`)
 );
 
-//TODO This will be removed
-async function main() {
-  console.log(`... starting function to test ...`);
-  // try here the functions you want to test
-  console.log(`... ending function to test ...`);
-}
-
-main();
+// api can be accessed at http://localhost:PORT/api
+app.use("/api", router());

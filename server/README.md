@@ -1,16 +1,22 @@
 # Server
 
+> To try the server see [Run a demo](#run-a-demo)
+
 ## Installation
 
 ```bash
+# node 18.16.0 is required
 npm install
 ```
 
-## Commands
+## Node Commands
 
 ```bash
 # to start the server
 npm run dev
+
+# to start the server without generating the prisma client (faster)
+npm run dev:no-generate
 
 # to update the prisma client (after schema changes)
 npm run update
@@ -18,8 +24,37 @@ npm run update
 # to show the prisma studio (UI for the database)
 npm run studio
 
-# to fill the database with fake data
-npm run seed
+# to build the server
+npm run build
+
+# to start the server in production
+npm run start
+
+# to fill the database with fake data DEPRECATED
+# npm run seed
+```
+
+## `.ENV` file
+
+```bash
+# environment (use `development` in local and `production` in production)
+NODE_ENV="development"
+
+# port of the server (es. 8080)
+API_PORT=
+
+# url of the database
+DATABASE_URL=""
+
+# magic auth service
+MAGIC_SECRET_KEY=""
+MAGIC_PUBLISHABLE_KEY=""
+
+# email service
+GMAIL_PASSWORD=""
+
+# secret session key (to create the session cookie)
+SECRET_KEY=""
 ```
 
 ## Use with MongoDB Atlas (easy)
@@ -46,4 +81,100 @@ docker-compose up -d
 
 In dev mode server restarts automatically every time you save a file.
 
-`seed.ts` is used to fill the database with fake data.
+## Implement a new feature
+
+> in each folder ther is `template.example` file that you can copy and rename to start a new file.
+> Commit each step
+
+1. Create a new branch from `dev` branch
+2. Implement your feature
+   1. create the functions in `src/db` to interact with the database
+   2. Export the functions in `src/db/index.ts`
+   3. create the functions in `src/controllers` to interact with the client
+   4. export the functions in `src/controllers/index.ts`
+   5. create the routes in `src/routes` to handle the requests
+   6. add the routes in `src/routes/index.ts`
+3. Test your feature
+
+## Demo 1
+
+Using Postman or Insomnia, send a `POST` request to `https://wave-edu-server.onrender.com/api/auth/link` with the following body:
+
+```json
+{
+  "email": "samumaz01@gmail.com"
+}
+```
+
+Because we leaved the dev mode, you will not receive any mail. In you cookies there should be already the token to access the protected routes.
+
+Run a `GET` request to `https://wave-edu-server.onrender.com/api/auth/login` and you should receive the following response:
+
+> 200 OK
+
+Then you can try to access the protected routes. Run a `GET` request to `https://wave-edu-server.onrender.com/api/user` and you should receive the following response:
+
+> 200 OK
+
+```json
+[
+  {
+    "id": "645bc94420f7e891ad62f99c",
+    "email": "samumaz01@gmail.com",
+    "name": "Samuele Mazzei",
+    "userType": "TEACHER",
+    "chatIDs": ["645bc94520f7e891ad62f9a0"]
+  },
+  {
+    "id": "645bc94420f7e891ad62f99d",
+    "email": "pippo@example.com",
+    "name": "Pippo",
+    "userType": "STUDENT",
+    "chatIDs": []
+  },
+  {
+    "id": "645bc94420f7e891ad62f99e",
+    "email": "pluto@example.com",
+    "name": "Pluto",
+    "userType": "STUDENT",
+    "chatIDs": []
+  }
+]
+```
+
+## Demo 2
+
+Using Postman or Insomnia, send a `POST` request to `https://wave-edu-server.onrender.com/api/user` to create a new user with the following body:
+
+```json
+{
+  "email": "email@example.com",
+  "name": "John Doe",
+  "role": "TEACHER"
+}
+```
+
+Then, send a `POST` request to `https://wave-edu-server.onrender.com/api/chat` to create a new chat with the following body:
+
+```json
+{
+  "ownerId": <ownerId returned before>,
+   "name": "Chat name"
+}
+```
+
+Then, send a `POST` request to `https://wave-edu-server.onrender.com/api/message` to create a new message with the following body:
+
+```json
+{
+  "ownerId": "the one before",
+  "chatId": "the one returne earlier",
+  "messageType": "LEZIONE", // see the docs for other message types
+  "data": "2023-05-20T17:21:15.361+00:00", // ISO date
+  "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas quis diam euismod, feugiat dolor sit amet, ultricies leo."
+}
+```
+
+> other message type are available (see the [Docs](../server/src/docs/message.md))
+
+Then, you can send a `DELETE` request to `https://wave-edu-server.onrender.com/api/message/:id` to delete the message.
