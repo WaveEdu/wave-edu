@@ -35,14 +35,18 @@ export async function isTeacher(
     const user = await getUserBySessionToken(sessionToken);
     if (!user) return res.sendStatus(401);
 
-    if (user.userType !== "TEACHER") return res.sendStatus(403);
+    if (user.userType !== "TEACHER")
+      return res.status(403).json({
+        message:
+          "You are not a teacher. You are not allowed to do this action.",
+      });
 
     merge(req, { identity: user });
 
     return next();
   } catch (error) {
     console.error(error);
-    res.sendStatus(403);
+    res.sendStatus(500);
   }
 }
 
@@ -58,13 +62,17 @@ export async function isStudent(
     const user = await getUserBySessionToken(sessionToken);
     if (!user) return res.sendStatus(401);
 
-    if (user.userType !== "STUDENT") return res.sendStatus(403);
+    if (user.userType !== "STUDENT")
+      return res.status(403).json({
+        message:
+          "You are not a student. You are not allowed to do this action.",
+      });
 
     merge(req, { identity: user });
 
     return next();
   } catch (error) {
     console.error(error);
-    res.sendStatus(403);
+    res.sendStatus(500);
   }
 }

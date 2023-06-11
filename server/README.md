@@ -106,7 +106,11 @@ Using Postman or Insomnia, send a `POST` request to `https://wave-edu-server.onr
 }
 ```
 
+_old_
 Because we leaved the dev mode, you will not receive any mail. In you cookies there should be already the token to access the protected routes.
+
+_new_
+You should receive an email with a link. Add the token parameter to the following request.
 
 Run a `GET` request to `https://wave-edu-server.onrender.com/api/auth/login` and you should receive the following response:
 
