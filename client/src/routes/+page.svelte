@@ -20,15 +20,36 @@
 <Phone>
 	<div class="flex h-full w-full flex-col">
 		<header>
+			<div class="mx-3 mt-28 flex flex-1 flex-row gap-2">
+				<h1 class="inline-block text-6xl normal-case">Login</h1>
+
+			</div>
+		</header>
+		<main> 
+			<div class="mx-4 mt-5 w-full join">
+				<input class="input w-80 join-item rounded-sm outline" placeholder="Email"/>
+			</div>
+			<button class="btn btn-neutral w-full mt-5">Accedi</button>
+		</main>
+	</div>
+</Phone>
+
+<Phone>
+	<div class="flex h-full w-full flex-col">
+		<header>
 			<div class="mx-2 mt-28 flex flex-1 flex-row gap-2">
 				<h1 class="inline-block text-6xl normal-case">Login</h1>
 
 			</div>
 		</header>
 		<main> 
-			<div class="mx-2 mt-5 join">
-				<input class="input join-item rounded-sm outline" placeholder="Email"/>
+			<div class="mx-4 mt-5 w-full join">
+				<input class="input w-80 join-item rounded-sm outline" placeholder="Email"/>
 			</div>
+			<div class="alert mt-5 h-11 alert-warning">
+				<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+			</div>
+			<button class="btn btn-neutral w-full mt-5">Accedi</button>
 		</main>
 	</div>
 </Phone>
@@ -106,15 +127,25 @@
                     <img src="/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" class="rounded-box" />
                 </div>
               </div>
+			  <div class="grid grid-flow-row gap-4">
+				<div class>01{chatTitle}</div>
+				<!-- ... -->
+				<div>09</div>
+			  </div>
 		</main>
 		<footer>
-			<div class="footer mx-28 my-2 flex flex-row gap-20">
-				<button>
-				  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
-				</button>
-				<button class="active">
-				  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-				</button>
+			<div class="navbar m-1 bg-base-100 ">
+				<div class="mx-24 footer flex flex-row gap-20">
+					<div class="indicator">
+						<span class="indicator-item badge badge-neutral"></span> 
+						<button>
+						<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256"><path fill="#000000" d="M236.06 187.69A84 84 0 0 0 172.29 68.9a84 84 0 1 0-152.35 70.79l-7.24 25.36A18 18 0 0 0 35 187.3l25.36-7.24a84.27 84.27 0 0 0 23.36 7a84.05 84.05 0 0 0 112 41l25.36 7.24a18 18 0 0 0 22.25-22.25Zm-207.7-23.47Zm33.17-9a12 12 0 0 0-3.3.46l-19.49 5.57l5.57-19.49a12 12 0 0 0-1-9.05a60 60 0 1 1 24 24a11.91 11.91 0 0 0-5.78-1.48Zm150.16 34.54l5.57 19.49l-19.49-5.57a12 12 0 0 0-9.05 1A60.06 60.06 0 0 1 111 186.63a83.93 83.93 0 0 0 68.55-91.37a60 60 0 0 1 33.16 85.46a12 12 0 0 0-1.02 9.05Z"/></svg>					  
+						</button>
+					</div>
+					<button class="active">
+					  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+					</button>
+				</div>
 			</div>
 		</footer>
 	</div>
