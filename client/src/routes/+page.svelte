@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { PUBLIC_DEPLOY_URL_SERVER } from '$env/static/public';
 	import Phone from '../components/Phone.svelte';
 	import ThemeToggle from '../components/ThemeToggle.svelte';
 	let chatTitle = 'Pokemon Chat';
@@ -11,7 +12,7 @@
 		event.preventDefault();
 		loading = true;
 
-		const response = await fetch('http://wave-edu-server.onrender.com/api/auth/link', {
+		const response = await fetch(`${PUBLIC_DEPLOY_URL_SERVER}/api/auth/link`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ email })
