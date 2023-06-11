@@ -1,11 +1,36 @@
-<script>
+<script lang="ts">
 	import Phone from '../components/Phone.svelte';
 	import ThemeToggle from '../components/ThemeToggle.svelte';
 	let chatTitle = 'Pokemon Chat';
-</script>
+	let email = '';
+	let loading = false;
+	let successMessage = '';
+	let errorMessage = '';
 
-<h1 class="text-3xl font-bold underline">Hello world!</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+	const handleSubmit = async (event: SubmitEvent) => {
+		event.preventDefault();
+		loading = true;
+
+		const response = await fetch('http://wave-edu-server.onrender.com/api/auth/link', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ email })
+		});
+
+		const { message, cookieToken } = await response.json();
+
+		if (message) {
+			successMessage =
+				'A Magic Link has been sent to your email address. Please click it to log in.';
+			document.cookie = `node-magic-link-check=${cookieToken}; path=/;`;
+		} else {
+			errorMessage = 'An error occurred. Please try again later.';
+			loading = false;
+			return;
+		}
+		loading = false;
+	};
+</script>
 
 <button class="btn btn-neutral">Neutral</button>
 <button class="btn btn-primary">Primary</button>
@@ -108,3 +133,24 @@
 	</div>
 </Phone>
 
+<main>
+	{#if successMessage}
+		<p>{successMessage}</p>
+	{:else if errorMessage}
+		<p>{errorMessage}</p>
+	{:else}
+		<form on:submit={handleSubmit}>
+			<label>
+				Email:
+				<input type="email" bind:value={email} required />
+			</label>
+			<button type="submit" disabled={loading}>
+				{#if loading}
+					Loading...
+				{:else}
+					Send Magic Link
+				{/if}
+			</button>
+		</form>
+	{/if}
+</main>

@@ -46,9 +46,7 @@ export async function postAuthLinkController(
     }
 
     const token = randomToken();
-    const link = `${
-      req.protocol + "://" + req.get("host")
-    }/api/auth/login?token=${token}`;
+    const link = `${process.env.PUBLIC_DEPLOY_URL_CLIENT}/api/auth/login?token=${token}`;
 
     // Validity limit
     const validUntil = new Date(Date.now() + 15 * 60 * 1000); // in 15 minutes
@@ -84,9 +82,11 @@ export async function postAuthLinkController(
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year
       });
-      res.status(200).json({ token: token }).end();
+      res.status(200).json({ token: cookieToken }).end();
     } else {
-      res.sendStatus(200);
+      res
+        .status(200)
+        .json({ message: "Magic link sent!", cookieToken: cookieToken });
     }
   } catch (error) {
     console.error(error);
@@ -107,15 +107,17 @@ export async function getAuthLoginController(
       if (cookieToken) token = cookieToken;
     }
 
-    if (!token) return res.sendStatus(400);
+    // send message missing token
+    if (!token) return res.status(400).json({ message: "Missing token" });
 
     // retrieve the token from local cookies
     const cookieToken = req.cookies["node-magic-link-check"];
-    if (!cookieToken) return res.sendStatus(400);
+    if (!cookieToken)
+      return res.status(400).json({ message: "Missing cookieToken" });
 
     // check if the token is valid
     const magicLink = await validateToken(token as string, cookieToken);
-    if (!magicLink) return res.sendStatus(400);
+    if (!magicLink) return res.status(400).json({ message: "Invalid token" });
 
     // clear the cookie
     res.clearCookie("node-magic-link-check");
@@ -123,16 +125,18 @@ export async function getAuthLoginController(
     // mark the token as used
     markTokenAsUsed(magicLink.id);
 
-    // add a cookie with the session token
+    // send the session token
     res.cookie("node-magic-link-session", magicLink.token, {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year
     });
 
     // redirect to the home page
-    // res.redirect("/api/auth/login/success");
     console.log("Login success!");
-    res.sendStatus(200);
+    res.redirect(`${process.env.DEPLOY_URL_CLIENT}/chat`);
+    // res
+    //   .status(200)
+    //   .json({ message: "Login success!", sessionToken: magicLink.token });
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
@@ -154,7 +158,7 @@ export async function deleteLogoutController(
     // redirect to the home page
     // res.redirect("/api/auth/logout/success");
     console.log("Logout success!");
-    res.sendStatus(200);
+    res.status(200).json({ message: "Logout success!" });
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
