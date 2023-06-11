@@ -9,13 +9,13 @@
 	});
 </script>
 
-<div class="form-control">
+<div class="form-control mt-8">
 	<label class="swap swap-rotate">
 		<input type="checkbox" bind:checked data-toggle-theme="myDark,myLight" />
 
 		<!-- sun icon -->
 		<svg
-			class="swap-on fill-primary h-8 w-8"
+			class="swap-on fill-black h-8 w-8"
 			xmlns="http://www.w3.org/2000/svg"
 			width="1em"
 			height="1em"
@@ -27,7 +27,7 @@
 
 		<!-- moon icon -->
 		<svg
-			class="swap-off fill-primary h-8 w-8"
+			class="swap-off fill-white  h-8 w-8"
 			xmlns="http://www.w3.org/2000/svg"
 			width="1em"
 			height="1em"
