@@ -226,6 +226,7 @@ paths:
       tags:
         - Chat
       summary: Create a new chat
+      description: L'API "Create a new chat" fornisce una serie di endpoint che consentono agli utenti di avviare nuove conversazioni e di unirsi a quelle esistenti. Gli insegnanti possono inviare richieste al server con i parametri appropriati e l'API creerà quindi una nuova chat room e restituirà un identificatore univoco che potrà essere utilizzato per fare riferimento alla chat nelle richieste future. Questa API supporta la messaggistica in tempo reale ed è progettata per essere scalabile ed efficiente, consentendo a un gran numero di utenti di partecipare alle chat simultaneamente. La sicurezza è una priorità assoluta per questa API, che include meccanismi di autenticazione e autorizzazione per garantire che solo gli utenti autorizzati possano accedere e interagire con la creazione di nuove chat.
       parameters:
         - name: body
           in: body
@@ -421,7 +422,79 @@ paths:
       responses:
         "201":
           description: Participant removed from chat
-  
+
+  /message:
+     get:
+      tags:
+        - Message
+      summary: Get all message
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              ChatId:
+                type: string
+      security:
+        - teacher: []
+      responses:
+        200:
+          description: Messages Acquired Successfully 
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              messageType:
+                type: string
+              chatId:
+                type: string
+     put:
+      tags:
+        - Message
+      summary: Update chat by ID
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+      security:
+        - teacher: []
+      responses:
+        "200":
+          description: chat updated successfully
+          schema:
+            type: object
+            properties:
+              id chat:
+                type: string
+              name:
+                type: string
+     delete:
+      tags:
+        - Message
+      summary: Delete chat by ID
+
+      security:
+        - teacher: []
+      responses:
+        "204":
+          description: chat removed successfully
+          schema:
+            type: object
+            properties:
+              id chat:
+                type: string
+              name:
+                type: string
+              message:
+                type: array
+              users:
+                type: array   
 
   
 securityDefinitions:
