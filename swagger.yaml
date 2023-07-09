@@ -306,6 +306,7 @@ paths:
       tags:
         - Chat
       summary: Get chats by ID
+      description: L'API "Get chats by ID" è uno strumento che consente agli utenti di recuperare informazioni su una specifica chat in un'applicazione. Questa API fornisce una serie di endpoint che consentono agli utenti di interrogare il server per una chat room in base al suo identificatore univoco e di restituire i dati della chat corrispondenti, come il nome della chat, i partecipanti e la cronologia dei messaggi. Per utilizzare quest’API, gli utenti possono inviare richieste al server con i parametri appropriati, come l'ID della chat. L'API restituirà quindi un oggetto JSON contenente i dati della chat associati all'ID specificato. La sicurezza è una priorità assoluta per questa API, che include meccanismi di autenticazione e autorizzazione per garantire che solo gli utenti autorizzati possano accedere ai dati delle chat.
       parameters:
         - name: id
           in: path
