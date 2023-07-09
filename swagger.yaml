@@ -257,6 +257,7 @@ paths:
       tags:
         - Chat
       summary: Get all chats
+      description: L'API "Get all chats" è uno strumento che consente agli utenti di recuperare informazioni su tutte le chat esistenti in un'applicazione. Questa API fornisce una serie di endpoint che consentono agli utenti di interrogare il server per ottenere un elenco di tutte le chat disponibili e i relativi dettagli, come il nome della chat, i partecipanti e la cronologia dei messaggi. Per utilizzare l'API, gli sviluppatori possono inviare richieste al server con i parametri appropriati, come le opzioni di filtraggio per limitare i risultati a chat specifiche o le opzioni di ordinamento per ordinare le chat in base a vari criteri. L'API restituirà quindi un oggetto JSON contenente l'elenco delle chat e i relativi metadati. La sicurezza è una priorità assoluta per questa API, che include meccanismi di autenticazione e autorizzazione per garantire che solo gli utenti autorizzati possano accedere ai dati delle chat. 
       parameters:
         - name: body
           in: body
@@ -285,6 +286,7 @@ paths:
       tags:
         - Chat
       summary: Delete all chats
+      description: L'API "Delete all chats" è uno strumento che consente agli utenti di rimuovere tutte le chat esistenti in un'applicazione. Questa API fornisce una serie di endpoint che consentono agli utenti di inviare richieste al server per eliminare tutte le chat e i dati ad esse associati, compresi messaggi, partecipanti. Per utilizzare l'API, gli utenti possono inviare richieste al server con i parametri appropriati, come la conferma dell'azione di cancellazione. Una volta elaborata la richiesta, l'API eliminerà tutte le chat e i relativi dati e restituirà un messaggio di successo. La sicurezza è una priorità assoluta per questa API, che include meccanismi di autenticazione e autorizzazione per garantire che solo gli utenti autorizzati possano accedere ed eliminare i dati delle chat.  
       parameters:
         - name: body
           in: body
