@@ -331,6 +331,7 @@ paths:
       tags:
         - Chat
       summary: Update chat by ID
+      description: L'API "Update chats by ID" è uno strumento che consente agli utenti di modificare le chat esistenti in un'applicazione. Questa API fornisce una serie di endpoint che consentono agli utenti di inviare richieste al server per aggiornare specifiche chat e i dati ad esse associati, come il nome della chat. Per utilizzare l'API, gli utenti possono inviare richieste al server con i parametri appropriati, come l'ID della chat e i dati aggiornati della chat. L'API aggiornerà quindi la chat con le nuove informazioni e restituirà un messaggio di successo. La sicurezza è una priorità assoluta per questa API, che include meccanismi di autenticazione e autorizzazione per garantire che solo gli utenti autorizzati possano accedere e modificare i dati delle chat.
       parameters:
         - name: id
           in: path
@@ -360,6 +361,7 @@ paths:
       tags:
         - Chat
       summary: Delete chat by ID
+      description: L'API "Delete chats by ID" è uno strumento che consente agli utenti di rimuovere specifiche chat in un'applicazione. Questa API fornisce una serie di endpoint che consentono agli utenti di inviare richieste al server per eliminare una chat e i dati ad essa associati, compresi messaggi, partecipanti. Per utilizzare l'API, gli utenti possono inviare richieste al server con i parametri appropriati, come l'ID della chat e la conferma dell'azione di cancellazione. Una volta elaborata la richiesta, l'API eliminerà la chat specificata e i suoi dati e restituirà un messaggio di successo. La sicurezza è una priorità assoluta per questa API, che include meccanismi di autenticazione e autorizzazione per garantire che solo gli utenti autorizzati possano accedere ed eliminare i dati delle chat.
       parameters:
         - name: id
           in: path
