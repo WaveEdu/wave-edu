@@ -226,6 +226,7 @@ paths:
       tags:
         - Chat
       summary: Create a new chat
+      description: L'API "Create a new chat" fornisce una serie di endpoint che consentono agli utenti di avviare nuove conversazioni e di unirsi a quelle esistenti. Gli insegnanti possono inviare richieste al server con i parametri appropriati e l'API creerà quindi una nuova chat room e restituirà un identificatore univoco che potrà essere utilizzato per fare riferimento alla chat nelle richieste future. Questa API supporta la messaggistica in tempo reale ed è progettata per essere scalabile ed efficiente, consentendo a un gran numero di utenti di partecipare alle chat simultaneamente. La sicurezza è una priorità assoluta per questa API, che include meccanismi di autenticazione e autorizzazione per garantire che solo gli utenti autorizzati possano accedere e interagire con la creazione di nuove chat.
       parameters:
         - name: body
           in: body
@@ -256,6 +257,7 @@ paths:
       tags:
         - Chat
       summary: Get all chats
+      description: L'API "Get all chats" è uno strumento che consente agli utenti di recuperare informazioni su tutte le chat esistenti in un'applicazione. Questa API fornisce una serie di endpoint che consentono agli utenti di interrogare il server per ottenere un elenco di tutte le chat disponibili e i relativi dettagli, come il nome della chat, i partecipanti e la cronologia dei messaggi. Per utilizzare l'API, gli sviluppatori possono inviare richieste al server con i parametri appropriati, come le opzioni di filtraggio per limitare i risultati a chat specifiche o le opzioni di ordinamento per ordinare le chat in base a vari criteri. L'API restituirà quindi un oggetto JSON contenente l'elenco delle chat e i relativi metadati. La sicurezza è una priorità assoluta per questa API, che include meccanismi di autenticazione e autorizzazione per garantire che solo gli utenti autorizzati possano accedere ai dati delle chat. 
       parameters:
         - name: body
           in: body
@@ -284,6 +286,7 @@ paths:
       tags:
         - Chat
       summary: Delete all chats
+      description: L'API "Delete all chats" è uno strumento che consente agli utenti di rimuovere tutte le chat esistenti in un'applicazione. Questa API fornisce una serie di endpoint che consentono agli utenti di inviare richieste al server per eliminare tutte le chat e i dati ad esse associati, compresi messaggi, partecipanti. Per utilizzare l'API, gli utenti possono inviare richieste al server con i parametri appropriati, come la conferma dell'azione di cancellazione. Una volta elaborata la richiesta, l'API eliminerà tutte le chat e i relativi dati e restituirà un messaggio di successo. La sicurezza è una priorità assoluta per questa API, che include meccanismi di autenticazione e autorizzazione per garantire che solo gli utenti autorizzati possano accedere ed eliminare i dati delle chat.  
       parameters:
         - name: body
           in: body
@@ -303,6 +306,7 @@ paths:
       tags:
         - Chat
       summary: Get chats by ID
+      description: L'API "Get chats by ID" è uno strumento che consente agli utenti di recuperare informazioni su una specifica chat in un'applicazione. Questa API fornisce una serie di endpoint che consentono agli utenti di interrogare il server per una chat room in base al suo identificatore univoco e di restituire i dati della chat corrispondenti, come il nome della chat, i partecipanti e la cronologia dei messaggi. Per utilizzare quest’API, gli utenti possono inviare richieste al server con i parametri appropriati, come l'ID della chat. L'API restituirà quindi un oggetto JSON contenente i dati della chat associati all'ID specificato. La sicurezza è una priorità assoluta per questa API, che include meccanismi di autenticazione e autorizzazione per garantire che solo gli utenti autorizzati possano accedere ai dati delle chat.
       parameters:
         - name: id
           in: path
@@ -327,6 +331,7 @@ paths:
       tags:
         - Chat
       summary: Update chat by ID
+      description: L'API "Update chats by ID" è uno strumento che consente agli utenti di modificare le chat esistenti in un'applicazione. Questa API fornisce una serie di endpoint che consentono agli utenti di inviare richieste al server per aggiornare specifiche chat e i dati ad esse associati, come il nome della chat. Per utilizzare l'API, gli utenti possono inviare richieste al server con i parametri appropriati, come l'ID della chat e i dati aggiornati della chat. L'API aggiornerà quindi la chat con le nuove informazioni e restituirà un messaggio di successo. La sicurezza è una priorità assoluta per questa API, che include meccanismi di autenticazione e autorizzazione per garantire che solo gli utenti autorizzati possano accedere e modificare i dati delle chat.
       parameters:
         - name: id
           in: path
@@ -356,6 +361,7 @@ paths:
       tags:
         - Chat
       summary: Delete chat by ID
+      description: L'API "Delete chats by ID" è uno strumento che consente agli utenti di rimuovere specifiche chat in un'applicazione. Questa API fornisce una serie di endpoint che consentono agli utenti di inviare richieste al server per eliminare una chat e i dati ad essa associati, compresi messaggi, partecipanti. Per utilizzare l'API, gli utenti possono inviare richieste al server con i parametri appropriati, come l'ID della chat e la conferma dell'azione di cancellazione. Una volta elaborata la richiesta, l'API eliminerà la chat specificata e i suoi dati e restituirà un messaggio di successo. La sicurezza è una priorità assoluta per questa API, che include meccanismi di autenticazione e autorizzazione per garantire che solo gli utenti autorizzati possano accedere ed eliminare i dati delle chat.
       parameters:
         - name: id
           in: path
@@ -421,7 +427,79 @@ paths:
       responses:
         "201":
           description: Participant removed from chat
-  
+
+  /message:
+     get:
+      tags:
+        - Message
+      summary: Get all message
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              ChatId:
+                type: string
+      security:
+        - teacher: []
+      responses:
+        200:
+          description: Messages Acquired Successfully 
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              messageType:
+                type: string
+              chatId:
+                type: string
+     put:
+      tags:
+        - Message
+      summary: Update chat by ID
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+      security:
+        - teacher: []
+      responses:
+        "200":
+          description: chat updated successfully
+          schema:
+            type: object
+            properties:
+              id chat:
+                type: string
+              name:
+                type: string
+     delete:
+      tags:
+        - Message
+      summary: Delete chat by ID
+
+      security:
+        - teacher: []
+      responses:
+        "204":
+          description: chat removed successfully
+          schema:
+            type: object
+            properties:
+              id chat:
+                type: string
+              name:
+                type: string
+              message:
+                type: array
+              users:
+                type: array   
 
   
 securityDefinitions:
