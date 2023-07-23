@@ -74,6 +74,7 @@ paths:
       tags:
         - User
       summary: Create a new user
+      description: L'API "Create a new user" è un'interfaccia basata sul web che consente agli utenti di creare nuovi account in un sistema o in un'applicazione. Questa API può essere utilizzata per registrare nuovi utenti e consentire l'accesso a varie funzionalità o servizi offerti dal sistema. Per utilizzare l'API, gli utenti possono fornire le informazioni necessarie per la creazione di un nuovo account, come nome utente, indirizzo e-mail e ruolo. L'API invierà quindi queste informazioni al server, che creerà un nuovo account utente e memorizzerà i dati necessari nel sistema. Una volta creato l'account, l'utente può effettuare il login e accedere alle funzionalità e ai servizi del sistema.
       parameters:
         - name: body
           in: body
@@ -106,6 +107,7 @@ paths:
       tags:
         - User
       summary: Get all users
+      description: L'API "Get all user" consente a un'applicazione client di recuperare un elenco di tutti gli utenti memorizzati in un database o in un sistema. Questa API restituisce in genere un insieme di oggetti utente, ciascuno contenente informazioni quali l'ID utente, il nome utente, l'indirizzo e-mail e altri dettagli rilevanti dell'utente. Per utilizzare questa API, l'applicazione client invia una richiesta GET all'endpoint dell'API, che restituisce l'elenco degli utenti in formato JSON. Tuttavia, è importante garantire l'adozione di misure di sicurezza adeguate per proteggere le informazioni sensibili degli utenti e impedire l'accesso non autorizzato all'API.
       security:
         - Admin: []
       responses:
@@ -127,6 +129,7 @@ paths:
       tags:
         - User
       summary: Delete all users
+      description: L'API "Delete all user" è un'interfaccia basata sul Web che consente agli amministratori di sistema o agli utenti autorizzati di eliminare tutti i dati degli utenti da un database o da un server. Questa API può essere utilizzata per rimuovere tutti gli account utente e i dati associati in situazioni in cui è necessario. Per utilizzare l'API, gli utenti con le autorizzazioni appropriate possono inviare una richiesta al server indicando che tutti i dati degli utenti devono essere eliminati. L'API elaborerà la richiesta ed eliminerà tutti i dati dell'utente dal sistema.
       security:
         - Admin: []
       responses:
@@ -138,6 +141,7 @@ paths:
       tags:
         - User
       summary: Get user by ID
+      description: Questa API consente a un'applicazione client di recuperare le informazioni di un utente specifico in base al suo identificatore unico (ID) memorizzato in un database o in un sistema. L'API richiede in genere una richiesta autenticata con il livello di autorizzazione appropriato per garantire che solo gli utenti autorizzati possano recuperare le informazioni sull'utente. Una volta ricevuta una richiesta GET con un ID utente valido, l'API restituisce un oggetto utente contenente informazioni quali il nome utente, l'indirizzo e-mail e altri dettagli rilevanti.
       parameters:
         - name: id
           in: path
@@ -164,6 +168,7 @@ paths:
       tags:
         - User
       summary: Update user by ID
+      description: Questa API consente a un'applicazione client di aggiornare le informazioni di un utente specifico in base al suo identificativo unico (ID) memorizzato in un database o in un sistema. L'API richiede in genere una richiesta autenticata con il livello di autorizzazione appropriato per garantire che solo gli utenti autorizzati possano aggiornare le informazioni dell'utente. Quando riceve una richiesta PUT o PATCH con un ID utente valido e i dati dell'utente aggiornati, l'API modifica il record dell'utente corrispondente nel sistema e restituisce un messaggio di successo che indica che l'utente è stato aggiornato con successo.
       parameters:
         - name: id
           in: path
@@ -201,6 +206,7 @@ paths:
       tags:
         - User
       summary: Delete user by ID
+      description: Questa API consente a un'applicazione client di eliminare l'account di un utente in base al suo identificatore unico (ID) memorizzato in un database o in un sistema. L'API richiede in genere una richiesta autenticata con il livello di autorizzazione appropriato per garantire che solo gli utenti autorizzati possano eliminare gli account utente. Quando riceve una richiesta di DELETE con un ID utente valido, l'API rimuove il record dell'utente corrispondente dal sistema e restituisce un messaggio di successo che indica che l'utente è stato eliminato con successo.
       parameters:
         - name: id
           in: path
