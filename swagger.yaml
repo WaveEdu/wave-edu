@@ -399,6 +399,7 @@ paths:
       tags:
         - Chat
       summary: Add a new partecipant to a chat
+      description: Questa API consente a un'applicazione client di aggiungere un nuovo partecipante a una chat o a una conversazione esistente. L'API richiede tipicamente una richiesta autenticata con il livello di autorizzazione appropriato per garantire che solo gli utenti autorizzati possano aggiungere partecipanti a una chat. Una volta ricevuta una richiesta POST con i dati necessari (come l'ID della chat room e l'ID del partecipante), l'API aggiunge il nuovo partecipante alla chat e restituisce un messaggio di successo che indica che l'aggiunta del partecipante è avvenuta con successo.
       parameters:
         - name: chatId
           in: path
@@ -420,6 +421,7 @@ paths:
       tags:
         - Chat
       summary: Remove a partecipant from a chat
+      description: Questa API consente a un'applicazione client di rimuovere un partecipante da una chat o da una conversazione esistente. L'API richiede tipicamente una richiesta autenticata con il livello di autorizzazione appropriato per garantire che solo gli utenti autorizzati possano rimuovere i partecipanti da una chat. Una volta ricevuta una richiesta DELETE con i dati necessari (come l'ID della chat room e l'ID del partecipante), l'API rimuove il partecipante dalla chat e restituisce un messaggio di successo che indica che la rimozione del partecipante è avvenuta con successo.
       parameters:
         - name: chatId
           in: path
