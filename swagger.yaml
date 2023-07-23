@@ -514,6 +514,29 @@ paths:
 #              content:
 #                type: string
 #                description: Può essere sia un semplice testo che un array, inoltre il content, in determinati casi, oltre al type string contiene il type DateTime per la data
+     post:
+      tags:
+        - Chat
+      summary: Create a new message
+      description: Questa API consente a un'applicazione client di aggiungere un nuovo partecipante a una chat o a una conversazione esistente. L'API richiede tipicamente una richiesta autenticata con il livello di autorizzazione appropriato per garantire che solo gli utenti autorizzati possano aggiungere partecipanti a una chat. Una volta ricevuta una richiesta POST con i dati necessari (come l'ID della chat room e l'ID del partecipante), l'API aggiunge il nuovo partecipante alla chat e restituisce un messaggio di successo che indica che l'aggiunta del partecipante è avvenuta con successo.
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              chatId:
+                type: string
+              ownerId:
+                type: string
+              messageType:
+                type: string
+      security:
+        - teacher: []
+      responses:
+        "201":
+          description: New message created
+          
      delete:
       tags:
         - Chat
@@ -534,37 +557,13 @@ paths:
         "204":
           description: All messages removed
           
-     put:
-      tags:
-        - Message
-      summary: Update chat by ID
-      parameters:
-        - name: body
-          in: body
-          schema:
-            type: object
-            properties:
-              name:
-                type: string
-      security:
-        - teacher: []
-      responses:
-        "200":
-          description: chat updated successfully
-          schema:
-            type: object
-            properties:
-              id chat:
-                type: string
-              name:
-                type: string
+
                 
   /message/{id}:
      delete:
       tags:
         - Chat
       summary: Delete chat by ID
-      description: L'API "Delete chats by ID" è uno strumento che consente agli utenti di rimuovere specifiche chat in un'applicazione. Questa API fornisce una serie di endpoint che consentono agli utenti di inviare richieste al server per eliminare una chat e i dati ad essa associati, compresi messaggi, partecipanti. Per utilizzare l'API, gli utenti possono inviare richieste al server con i parametri appropriati, come l'ID della chat e la conferma dell'azione di cancellazione. Una volta elaborata la richiesta, l'API eliminerà la chat specificata e i suoi dati e restituirà un messaggio di successo. La sicurezza è una priorità assoluta per questa API, che include meccanismi di autenticazione e autorizzazione per garantire che solo gli utenti autorizzati possano accedere ed eliminare i dati delle chat.
       parameters:
         - name: id
           in: path
@@ -587,7 +586,29 @@ paths:
                 type: array
               users:
                 type: array 
-
+                
+     put:
+      tags:
+        - Message
+      summary: Update chat by ID
+      parameters:
+        - name: id
+          in: path
+          description: ID of chat to delete
+          required: true
+          type: string
+      security:
+        - teacher: []
+      responses:
+        "200":
+          description: chat updated successfully
+          schema:
+            type: object
+            properties:
+              id chat:
+                type: string
+              name:
+                type: string
   
 securityDefinitions:
   teacher:
