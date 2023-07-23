@@ -17,6 +17,7 @@ paths:
       tags:
         - Authentication
       summary: Create a link to connect
+      description: Questa API consente a un'applicazione client di generare un collegamento univoco che permette all’utente di collegarsi all’applicazione per la prima volta. L'API richiede un livello di autorizzazione appropriato per garantire che solo gli utenti autorizzati possano creare collegamenti. Una volta ricevuta una richiesta POST con i dati necessari, l'API genera un link unico, che può essere condiviso con l’utente desiderato, e restituisce un token che può essere utilizzato per accedere alle risorse protette nelle richieste successive.
       parameters:
         - name: body
           in: body
@@ -41,6 +42,7 @@ paths:
       tags:
         - Authentication
       summary: Login
+      description: Questa API consente a un'applicazione client di autenticare un utente e di concedergli l'accesso alle risorse protette di un sistema. L'API richiede una richiesta GET con il token dell’utente. Una volta che gli utenti avranno inserito il token, verranno collegati all’applicazione. Questa tipologia di login semplifica e velocizza il metodo di autenticazione per l’utente.
       parameters:
       - name: body
         in: body
@@ -61,6 +63,7 @@ paths:
       tags:
         - Authentication
       summary: logout
+      description: Questa API consente a un'applicazione client di invalidare la sessione di un utente e di revocare il suo accesso alle risorse protette di un sistema. L'API richiede in genere una richiesta autenticata con il livello di autorizzazione appropriato per garantire che solo gli utenti autorizzati possano effettuare il logout. Quando riceve una richiesta DELETE, l'API invalida la sessione e restituisce un messaggio di successo che indica che l'utente è stato disconnesso con successo.
       security:
         - Admin: []
       responses:
