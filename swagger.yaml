@@ -561,6 +561,29 @@ paths:
 
                 
   /message/{id}:
+     put:
+      tags:
+        - Message
+      summary: Update chat by ID
+      parameters:
+        - name: id
+          in: path
+          description: ID of chat to delete
+          required: true
+          type: string
+      security:
+        - teacher: []
+      responses:
+        "200":
+          description: chat updated successfully
+          schema:
+            type: object
+            properties:
+              id chat:
+                type: string
+              name:
+                type: string
+                
      delete:
       tags:
         - Message
@@ -587,29 +610,6 @@ paths:
                 type: array
               users:
                 type: array 
-                
-     put:
-      tags:
-        - Message
-      summary: Update chat by ID
-      parameters:
-        - name: id
-          in: path
-          description: ID of chat to delete
-          required: true
-          type: string
-      security:
-        - teacher: []
-      responses:
-        "200":
-          description: chat updated successfully
-          schema:
-            type: object
-            properties:
-              id chat:
-                type: string
-              name:
-                type: string
   
 securityDefinitions:
   teacher:
