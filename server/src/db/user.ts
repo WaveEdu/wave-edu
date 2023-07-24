@@ -39,6 +39,24 @@ export async function readUser(id: string) {
   return user;
 }
 
+export async function readUserByMagicLinkToken(token: string) {
+  const user = await prisma.user.findFirst({
+    where: {
+      magicLinks: {
+        some: {
+          token: token,
+        },
+      },
+    },
+  });
+
+  console.dir(user, { depth: Infinity });
+  console.log("User found!");
+  console.log("------------------");
+
+  return user;
+}
+
 export async function updateUser(id: string, email?: string, name?: string) {
   const updatedUser = await prisma.user.update({
     where: {

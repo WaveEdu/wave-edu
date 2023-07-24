@@ -26,10 +26,11 @@
 	const handleSubmit = async (event: SubmitEvent) => {
 		event.preventDefault();
 		loading = true;
-		
+
 		const response = await fetch(`${PUBLIC_DEPLOY_URL_SERVER}/api/auth/link`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
+			credentials: 'include',
 			body: JSON.stringify({ email })
 		});
 
@@ -37,7 +38,7 @@
 
 		if (message) {
 			successMessage =
-			'A Magic Link has been sent to your email address. Please click it to log in.';
+				'A Magic Link has been sent to your email address. Please click it to log in.';
 			document.cookie = `node-magic-link-check=${cookieToken}; path=/;`;
 		} else {
 			errorMessage = 'An error occurred. Please try again later.';
@@ -56,59 +57,46 @@
 <button class="btn btn-ghost">Ghost</button>
 <button class="btn btn-link">Link</button>
 
-
-
-<h2 class="mt-7 mb-4 text-xl font-bold underline">Schermate Login</h2>
+<h2 class="mb-4 mt-7 text-xl font-bold underline">Schermate Login</h2>
 <Phone>
-	<Login>
-	</Login>
+	<Login />
 </Phone>
 
 <Phone>
-	<Warning>
-	</Warning>
+	<Warning />
 </Phone>
 
-<h2 class="mt-7 mb-4 text-xl font-bold underline">Schermate Profilo</h2>
+<h2 class="mb-4 mt-7 text-xl font-bold underline">Schermate Profilo</h2>
 <Phone>
 	<div class="flex h-full w-full flex-col">
 		<header>
-			<BarraSopra>
-			</BarraSopra>
+			<BarraSopra />
 		</header>
-		<main class="mt-8 flex h-full flex-col place-items-center text-center justify-start">
-			<AvatarProfilo>
-			</AvatarProfilo>
+		<main class="mt-8 flex h-full flex-col place-items-center justify-start text-center">
+			<AvatarProfilo />
 			<h6 class="mt-2 text-xl">--------@------</h6>
-			<h6 class="mt-2 mb-4 text-xl">--------@------</h6>
-			<Corsi>
-			</Corsi>
-			<BarraPCentrale>
-			</BarraPCentrale>
-	    </main>
+			<h6 class="mb-4 mt-2 text-xl">--------@------</h6>
+			<Corsi />
+			<BarraPCentrale />
+		</main>
 		<footer>
-			<BarraSotto>
-			</BarraSotto>
+			<BarraSotto />
 		</footer>
 	</div>
 </Phone>
 
-<h2 class="mt-7 mb-4 text-xl font-bold underline">Schermate Chat Professore</h2>
+<h2 class="mb-4 mt-7 text-xl font-bold underline">Schermate Chat Professore</h2>
 <Phone>
 	<div class="flex h-full w-full flex-col">
 		<header>
-			<BarraSopra>
-			</BarraSopra>
-			<Stories>
-			</Stories>
+			<BarraSopra />
+			<Stories />
 		</header>
 		<main class="flex h-full flex-col justify-start">
-			<ListaChat>
-			</ListaChat>
-	    </main>
+			<ListaChat />
+		</main>
 		<footer>
-			<BarraSotto>
-			</BarraSotto>
+			<BarraSotto />
 		</footer>
 	</div>
 </Phone>
@@ -116,33 +104,27 @@
 <Phone>
 	<div class="my-6 flex h-full w-full flex-col">
 		<header>
-			<BarraCSopra>
-			</BarraCSopra>
+			<BarraCSopra />
 		</header>
 		<main class="flex h-full flex-col justify-end">
-			<Chat>
-			</Chat>
+			<Chat />
 		</main>
 		<footer>
-			<BarraCSotto>
-			</BarraCSotto>
+			<BarraCSotto />
 		</footer>
 	</div>
 </Phone>
 
-<h2 class="mt-7 mb-4 text-xl font-bold underline">Schermata Amministratore</h2>
+<h2 class="mb-4 mt-7 text-xl font-bold underline">Schermata Amministratore</h2>
 <Phone>
 	<div class="flex h-full w-full flex-col">
 		<header>
-			<BarraSopra>
-			</BarraSopra>
-			<Stories>
-			</Stories>
+			<BarraSopra />
+			<Stories />
 		</header>
-		<main class="overflow-y-scroll ">
-			<TabellaUtenti>
-			</TabellaUtenti>
-		</main> 
+		<main class="overflow-y-scroll">
+			<TabellaUtenti />
+		</main>
 	</div>
 </Phone>
 <main>

@@ -8,7 +8,7 @@ export const handle = async ({ event, resolve }) => {
 	}
 	// if sessionId is present and you are on / route then redirect to dashboard
 	if (unProtectedRoutes.includes(event.url.pathname) && sessionId) {
-		throw redirect(303, '/dashboard');
+		throw redirect(303, '/chats');
 	}
 	return resolve(event);
 };
