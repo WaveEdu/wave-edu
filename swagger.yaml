@@ -439,6 +439,45 @@ paths:
         "201":
           description: Participant removed from chat
 
+  /messages/{ChatId}:
+     get:
+      tags:
+        - Message
+      summary: Get all message
+      description: Questo endpoint può essere utilizzato per recuperare tutti i messaggi di una particolare conversazione o chat o per recuperare i messaggi di più conversazioni o chat. La risposta conterrà un elenco di messaggi, ciascuno dei quali contiene informazioni quali il contenuto del messaggio, la data e l'ora e qualsiasi altro metadato pertinente.
+      parameters:
+        - name: ChatId
+          in: path
+          description: ID of chat
+          required: true
+          type: string
+      security:
+        - teacher: []
+      responses:
+        200:
+          description: Messages Acquired Successfully 
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              messageType:
+                type: string
+                description: Si può avere diversi tipi di messaggio tra cui LEZIONE, COMPITO, SONDAGGIO, EVENTO e COMUNICAZIONE
+              createdAt:
+                type: string
+              updatedAt:
+                type: string
+              Chat:
+                type: string
+              chatId:
+                type: string
+              ownerId:
+                type: string
+              content:
+                type: string
+                description: Può essere sia un semplice testo che un array, inoltre il content, in determinati casi, oltre al type string contiene il type DateTime per la data
+
   /message:
      post:
       tags:
@@ -484,91 +523,11 @@ paths:
                 type: string
                 description: Può essere sia un semplice testo che un array, inoltre il content, in determinati casi, oltre al type string contiene il type DateTime per la data
 
-
-     get:
-      tags:
-        - Message
-      summary: Get all message
-      description: Questo endpoint può essere utilizzato per recuperare tutti i messaggi di una particolare conversazione o chat o per recuperare i messaggi di più conversazioni o chat. La risposta conterrà un elenco di messaggi, ciascuno dei quali contiene informazioni quali il contenuto del messaggio, la data e l'ora e qualsiasi altro metadato pertinente.
-      parameters:
-        - name: body
-          in: body
-          schema:
-            type: object
-            properties:
-              chatId:
-                type: string
-      security:
-        - teacher: []
-      responses:
-        200:
-          description: Messages Acquired Successfully 
-          schema:
-            type: object
-            properties:
-              id:
-                type: string
-              messageType:
-                type: string
-                description: Si può avere diversi tipi di messaggio tra cui LEZIONE, COMPITO, SONDAGGIO, EVENTO e COMUNICAZIONE
-              createdAt:
-                type: string
-              updatedAt:
-                type: string
-              Chat:
-                type: string
-              chatId:
-                type: string
-              ownerId:
-                type: string
-              content:
-                type: string
-                description: Può essere sia un semplice testo che un array, inoltre il content, in determinati casi, oltre al type string contiene il type DateTime per la data
-    
-#    get:
-#      tags:
-#        - Message
-#      summary: Get last message
-#      description: Questo endpoint può essere utilizzato per recuperare tutti i messaggi di una particolare conversazione o chat o per recuperare i messaggi di più conversazioni o chat. La risposta conterrà un elenco di messaggi, ciascuno dei quali contiene informazioni quali il contenuto del messaggio, la data e l'ora e qualsiasi altro metadato pertinente.
-#      parameters:
-#        - name: body
-#          in: body
-#          schema:
-#            type: object
-#            properties:
-#              chatId:
-#                type: string
-#      security:
-#        - teacher: []
-#      responses:
-#        200:
-#          description: Messages Acquired Successfully 
-#          schema:
-#            type: object
-#            properties:
-#              id:
-#                type: string
-#              messageType:
-#                type: string
-#                description: Si può avere diversi tipi di messaggio tra cui LEZIONE, COMPITO, SONDAGGIO, EVENTO e COMUNICAZIONE
-#              createdAt:
-#                type: string
-#              updatedAt:
-#                type: string
-#              Chat:
-#                type: string
-#              chatId:
-#                type: string
-#              ownerId:
-#                type: string
-#              content:
-#                type: string
-#                description: Può essere sia un semplice testo che un array, inoltre il content, in determinati casi, oltre al type string contiene il type DateTime per la data
-
      delete:
       tags:
         - Message
       summary: Delete all messages
+      description: Questo endpoint può essere utilizzato per cancellare tutti i messaggi da una conversazione o una chat o per eliminare i messaggi da più conversazioni o chat room inserendo l’Id specifico della chat.
       parameters:
         - name: body
           in: body
@@ -599,7 +558,6 @@ paths:
           type: string
         - name: body
           in: body
-          description: ID of chat
           schema:
             type: object
             properties:
@@ -696,12 +654,18 @@ paths:
         "204":
           description: Message removed successfully
   
-  /lastmessage:
+  /lastmessage/{id}:
      get:
       tags:
         - Message
       summary: Get last message
       description: Questo endpoint API recupera il messaggio più recente da una conversazione o da una chat room specificata. La risposta conterrà il contenuto del messaggio, il mittente e qualsiasi altro metadato pertinente associato al messaggio.
+      parameters:
+        - name: id
+          in: path
+          description: ID of chat
+          required: true
+          type: string
       security:
         - teacher: []
       responses:
