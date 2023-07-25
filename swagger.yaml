@@ -655,17 +655,120 @@ paths:
       responses:
         "204":
           description: Message removed successfully
+
+  /story:
+     post:
+      tags:
+        - Story
+      summary: Create a new story
+      description: Questo endpoint API crea una nuova storia e la aggiunge a una fonte di dati specificata. La richiesta conterrà il contenuto della storia, l'autore e qualsiasi altro metadato rilevante associato alla storia. La risposta conterrà la nuova storia creata, compreso il suo ID univoco. Questo endpoint può essere usato per aggiungere nuove storie a una fonte di dati. L'API richiede un livello di autorizzazione appropriato per garantire che solo gli utenti autorizzati possano creare le stoies.
+      parameters:
+        - name: body
+          in: body
           schema:
             type: object
             properties:
-              id chat:
+              ownerId:
                 type: string
-              name:
+              filePhat:
+                type: string              
+              delateTime:
+                type: object 
+      security:
+        - teacher: []
+      responses:
+        "201":
+          description: New story created
+          schema:
+            type: object
+            properties:
+              id:
                 type: string
-              message:
-                type: array
-              users:
-                type: array 
+              ownerId:
+                type: string
+              filePhat:
+                type: string              
+              delateTime:
+                type: object
+
+  /story/{id}:
+     put:
+      tags:
+        - Story
+      summary: Update story by ID
+      description: Questo endpoint API aggiorna una storia specifica in base al suo ID. La richiesta conterrà il contenuto aggiornato della storia e qualsiasi altro metadato pertinente associato alla storia, come si suo specifico Id. La risposta conterrà il contenuto aggiornato della storia, l'autore e qualsiasi altro metadato pertinente. L'API richiede un livello di autorizzazione appropriato per garantire che solo gli utenti autorizzati possano aggiornare le stoies.
+      parameters:
+        - name: id
+          in: path
+          description: ID of story to update
+          required: true
+          type: string
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              filePhat:
+                type: string              
+              delateTime:
+                type: object
+      security:
+        - teacher: []
+      responses:
+        "200":
+          description: Story updated successfully
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              ownerId:
+                type: string
+              filePhat:
+                type: string              
+              delateTime:
+                type: object
+     get:
+      tags:
+        - Story
+      summary: Get story by ID
+      description: Questo endpoint può essere usato per recuperare una singola storia da una fonte di dati o per recuperare storie da più fonti di dati in base ai loro ID univoci. La risposta conterrà il contenuto della storia, l'autore, il timestamp e qualsiasi altro metadato rilevante associato alla storia.
+      parameters:
+        - name: id
+          in: path
+          description: ID of story to get
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Story Acquired successfully
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              ownerId:
+                type: string
+              filePhat:
+                type: string              
+              delateTime:
+                type: object
+     delete:
+      tags:
+        - Story
+      summary: Delete story by ID
+      description: Questo endpoint API elimina una storia specifica in base al suo ID. Questo endpoint può essere utilizzato per eliminare una singola storia o per eliminare più storie in base ai loro ID univoci. L'API richiede un livello di autorizzazione appropriato per garantire che solo gli utenti autorizzati possano eliminare le stoies.
+      parameters:
+        - name: id
+          in: path
+          description: ID of story to delete
+          required: true
+          type: string
+      security:
+        - teacher: []
+      responses:
+        "204":
+          description: Story removed successfully
   
 securityDefinitions:
   teacher:
