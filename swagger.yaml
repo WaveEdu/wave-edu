@@ -524,6 +524,46 @@ paths:
               content:
                 type: string
                 description: Può essere sia un semplice testo che un array, inoltre il content, in determinati casi, oltre al type string contiene il type DateTime per la data
+    
+#    get:
+#      tags:
+#        - Message
+#      summary: Get last message
+#      description: Questo endpoint può essere utilizzato per recuperare tutti i messaggi di una particolare conversazione o chat o per recuperare i messaggi di più conversazioni o chat. La risposta conterrà un elenco di messaggi, ciascuno dei quali contiene informazioni quali il contenuto del messaggio, la data e l'ora e qualsiasi altro metadato pertinente.
+#      parameters:
+#        - name: body
+#          in: body
+#          schema:
+#            type: object
+#            properties:
+#              chatId:
+#                type: string
+#      security:
+#        - teacher: []
+#      responses:
+#        200:
+#          description: Messages Acquired Successfully 
+#          schema:
+#            type: object
+#            properties:
+#              id:
+#                type: string
+#              messageType:
+#                type: string
+#                description: Si può avere diversi tipi di messaggio tra cui LEZIONE, COMPITO, SONDAGGIO, EVENTO e COMUNICAZIONE
+#              createdAt:
+#                type: string
+#              updatedAt:
+#                type: string
+#              Chat:
+#                type: string
+#              chatId:
+#                type: string
+#              ownerId:
+#                type: string
+#              content:
+#                type: string
+#                description: Può essere sia un semplice testo che un array, inoltre il content, in determinati casi, oltre al type string contiene il type DateTime per la data
 
      delete:
       tags:
@@ -655,6 +695,39 @@ paths:
       responses:
         "204":
           description: Message removed successfully
+  
+  /lastmessage:
+     get:
+      tags:
+        - Message
+      summary: Get last message
+      description: Questo endpoint API recupera il messaggio più recente da una conversazione o da una chat room specificata. La risposta conterrà il contenuto del messaggio, il mittente e qualsiasi altro metadato pertinente associato al messaggio.
+      security:
+        - teacher: []
+      responses:
+        200:
+          description: Messages Acquired Successfully 
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              messageType:
+                type: string
+                description: Si può avere diversi tipi di messaggio tra cui LEZIONE, COMPITO, SONDAGGIO, EVENTO e COMUNICAZIONE
+              createdAt:
+                type: string
+              updatedAt:
+                type: string
+              Chat:
+                type: string
+              chatId:
+                type: string
+              ownerId:
+                type: string
+              content:
+                type: string
+                description: Può essere sia un semplice testo che un array, inoltre il content, in determinati casi, oltre al type string contiene il type DateTime per la data
 
   /story:
      post:
@@ -771,6 +844,31 @@ paths:
       responses:
         "204":
           description: Story removed successfully
+  
+  /laststory:
+     get:
+      tags:
+        - Story
+      summary: Get last story
+      description: Questo endpoint può essere utilizzato per recuperare l'ultima storia aggiunta a una fonte di dati, utile per visualizzare le attività recenti o le notifiche agli utenti. La risposta conterrà il contenuto della storia, l'autore e qualsiasi altro metadato rilevante associato alla storia.
+      security:
+        - teacher: []
+      responses:
+        "200":
+          description: Story Acquired successfully
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              ownerId:
+                type: string
+              filePhat:
+                type: string              
+              delateTime:
+                type: object
+
+  
   
 securityDefinitions:
   teacher:
