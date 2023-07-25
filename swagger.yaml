@@ -439,14 +439,14 @@ paths:
         "201":
           description: Participant removed from chat
 
-  /messages/{ChatId}:
+  /messages/{chatId}:
      get:
       tags:
         - Message
       summary: Get all message
       description: Questo endpoint può essere utilizzato per recuperare tutti i messaggi di una particolare conversazione o chat o per recuperare i messaggi di più conversazioni o chat. La risposta conterrà un elenco di messaggi, ciascuno dei quali contiene informazioni quali il contenuto del messaggio, la data e l'ora e qualsiasi altro metadato pertinente.
       parameters:
-        - name: ChatId
+        - name: chatId
           in: path
           description: ID of chat
           required: true
@@ -654,14 +654,14 @@ paths:
         "204":
           description: Message removed successfully
   
-  /lastmessage/{id}:
+  /lastmessage/{chatid}:
      get:
       tags:
         - Message
       summary: Get last message
       description: Questo endpoint API recupera il messaggio più recente da una conversazione o da una chat room specificata. La risposta conterrà il contenuto del messaggio, il mittente e qualsiasi altro metadato pertinente associato al messaggio.
       parameters:
-        - name: id
+        - name: chatid
           in: path
           description: ID of chat
           required: true
