@@ -1,23 +1,9 @@
 <script lang="ts">
 	import { PUBLIC_DEPLOY_URL_SERVER } from '$env/static/public';
+	import { twMerge as cn } from 'tailwind-merge';
 	import Phone from '../components/Phone.svelte';
-	import AvatarProfilo from '../components/avatarProfilo.svelte';
-	import BarraCSopra from '../components/barraCSopra.svelte';
-	import BarraCSotto from '../components/barraCSotto.svelte';
-	import BarraPCentrale from '../components/barraPCentrale.svelte';
-	import BarraSopra from '../components/barraSopra.svelte';
-	import BarraSotto from '../components/barraSotto.svelte';
-	import Chat from '../components/chat.svelte';
-	import Corsi from '../components/corsi.svelte';
-	import ListaChat from '../components/listaChat.svelte';
-	import Login from '../components/login.svelte';
-	import Stories from '../components/stories.svelte';
-	import TabellaUtenti from '../components/tabellaUtenti.svelte';
-	import Warning from '../components/warning.svelte';
-	let chatTitle = 'Chat';
-	let nameApp = 'WaveEdu';
+	import Logo from '../components/Logo.svelte';
 
-	import ThemeToggle from '../components/ThemeToggle.svelte';
 	let email = '';
 	let loading = false;
 	let successMessage = '';
@@ -45,11 +31,15 @@
 			loading = false;
 			return;
 		}
+
 		loading = false;
+		// wait 4 seconds
+		await new Promise((resolve) => setTimeout(resolve, 4000));
+		successMessage = '';
 	};
 </script>
 
-<h1 class="text-3xl font-bold underline">{nameApp}</h1>
+<!-- <h1 class="text-3xl font-bold underline">{nameApp}</h1>
 <button class="btn btn-neutral">Neutral</button>
 <button class="btn btn-primary">Primary</button>
 <button class="btn btn-secondary">Secondary</button>
@@ -126,25 +116,35 @@
 			<TabellaUtenti />
 		</main>
 	</div>
-</Phone>
-<main>
-	{#if successMessage}
-		<p>{successMessage}</p>
-	{:else if errorMessage}
-		<p>{errorMessage}</p>
-	{:else}
-		<form on:submit={handleSubmit}>
-			<label>
-				Email:
-				<input type="email" bind:value={email} required />
+</Phone> -->
+<Phone>
+	<div class="grid h-full place-items-center">
+		<Logo />
+
+		<form class="form-control w-full max-w-lg" on:submit={handleSubmit}>
+			<label for="" class="label">
+				<span class="label-text"> Email </span>
 			</label>
-			<button type="submit" disabled={loading}>
+			<input class="input input-bordered" type="email" bind:value={email} required />
+			<label for="" class="label">
+				<span class="label-text-alt">
+					{errorMessage}
+				</span>
+			</label>
+			<button type="submit" disabled={loading} class={cn('btn btn-primary ')}>
 				{#if loading}
-					Loading...
+					<span class="loading loading-spinner" />
 				{:else}
-					Send Magic Link
+					Accedi
 				{/if}
 			</button>
 		</form>
-	{/if}
-</main>
+		{#if successMessage != ''}
+			<div class="alert alert-success">
+				<span class="wrap-text">
+					{successMessage}
+				</span>
+			</div>
+		{/if}
+	</div>
+</Phone>

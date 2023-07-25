@@ -3,6 +3,10 @@
 	import { onMount } from 'svelte';
 	import { PUBLIC_DEPLOY_URL_SERVER } from '$env/static/public';
 	import { userStore } from '$lib/userStore';
+	import Phone from '../../components/Phone.svelte';
+	import BarraSopra from '../../components/barraSopra.svelte';
+	import Stories from '../../components/stories.svelte';
+	import BarraSotto from '../../components/barraSotto.svelte';
 
 	interface Chat {
 		id: string;
@@ -55,33 +59,43 @@
 	});
 </script>
 
-<main>
-	<h1>Chats</h1>
-
-	{JSON.stringify($userStore, null, 2)}
-
-	<button
-		on:click={() => {
-			chats = [];
-			getChats().then((data) => {
-				chats = data;
-			});
-		}}>Get Chats</button
-	>
-
-	{#await getChats()}
-		<p>Loading...</p>
-	{:then data}
-		{#if data.length > 0}
-			<ul>
-				{#each data as chat}
-					<li>{chat.name}</li>
-				{/each}
-			</ul>
-		{:else}
-			<p>No chats found.</p>
-		{/if}
-	{:catch error}
-		<p>{error.message}</p>
-	{/await}
-</main>
+<Phone>
+	<div class="flex h-full w-full flex-col">
+		<header>
+			<BarraSopra />
+			<Stories />
+		</header>
+		<main class="flex h-full flex-col justify-start">
+			{#await getChats()}
+				<p>Loading...</p>
+			{:then data}
+				{#if data.length > 0}
+					<ul>
+						{#each data as chat}
+							<div class="flex items-center space-x-3">
+								<div class="avatar">
+									<div class="mask mask-squircle h-12 w-12">
+										<img
+											src={`https://api.dicebear.com/6.x/initials/svg?seed=${chat.name}`}
+											alt={chat.name}
+										/>
+									</div>
+								</div>
+								<div>
+									<div class="font-bold">{chat.name}</div>
+								</div>
+							</div>
+						{/each}
+					</ul>
+				{:else}
+					<p>No chats found.</p>
+				{/if}
+			{:catch error}
+				<p>{error.message}</p>
+			{/await}
+		</main>
+		<footer>
+			<BarraSotto />
+		</footer>
+	</div>
+</Phone>
