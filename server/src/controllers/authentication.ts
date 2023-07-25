@@ -3,6 +3,7 @@ import path from "path";
 import nodemailer, { SentMessageInfo } from "nodemailer";
 import {
   getUser,
+  getUserBySessionToken,
   markTokenAsUsed,
   saveToken,
   validateToken,
@@ -131,12 +132,16 @@ export async function getAuthLoginController(
       maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year
     });
 
-    // redirect to the home page
-    console.log("Login success!");
-    res.redirect(`${process.env.PUBLIC_DEPLOY_URL_CLIENT}/chat`);
-    // res
-    //   .status(200)
-    //   .json({ message: "Login success!", sessionToken: magicLink.token });
+    // get user info
+    const user = await getUserBySessionToken(magicLink.token);
+    if (!user) return res.status(400).json({ message: "Invalid token" });
+
+    // send user info
+    res
+      .status(200)
+      .redirect(
+        `${process.env.PUBLIC_DEPLOY_URL_CLIENT}/chats?userId=${user.id}`
+      );
   } catch (error) {
     console.error(error);
     res.sendStatus(500);

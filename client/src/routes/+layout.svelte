@@ -1,5 +1,8 @@
 <script>
+	import Phone from '../components/Phone.svelte';
 	import '../main.css';
 </script>
 
-<slot />
+<Phone>
+	<slot />
+</Phone>

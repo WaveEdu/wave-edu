@@ -91,11 +91,11 @@ export async function getChatsController(
   res: express.Response
 ) {
   try {
-    const { id } = req.params;
+    const { ownerId } = req.params;
 
-    if (!id) return res.sendStatus(400);
+    if (!ownerId) return res.sendStatus(400);
 
-    const chats = await readChats(id);
+    const chats = await readChats(ownerId);
 
     if (!chats) return res.sendStatus(404);
 

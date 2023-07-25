@@ -11,7 +11,7 @@ import {
 } from "../controllers";
 
 export default (router: express.Router) => {
-  router.get("/chat", getChatsController);
+  router.get("/chats/:ownerId", getChatsController);
   router.get("/chat/:id", getChatController);
   router.post("/chat", postChatController);
   router.put("/chat/:id", putChatController);

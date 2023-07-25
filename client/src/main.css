@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.wrap-text {
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	min-width: 0;
+}
