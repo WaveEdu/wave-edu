@@ -739,6 +739,8 @@ paths:
           description: ID of story to get
           required: true
           type: string
+      security:
+        - teacher: []
       responses:
         "200":
           description: Story Acquired successfully
