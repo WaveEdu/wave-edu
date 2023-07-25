@@ -654,14 +654,14 @@ paths:
         "204":
           description: Message removed successfully
   
-  /lastmessage/{chatid}:
+  /lastmessage/{chatId}:
      get:
       tags:
         - Message
       summary: Get last message
       description: Questo endpoint API recupera il messaggio più recente da una conversazione o da una chat room specificata. La risposta conterrà il contenuto del messaggio, il mittente e qualsiasi altro metadato pertinente associato al messaggio.
       parameters:
-        - name: chatid
+        - name: chatId
           in: path
           description: ID of chat
           required: true
