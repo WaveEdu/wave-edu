@@ -152,9 +152,10 @@ export async function putMessageController(
   res: express.Response
 ) {
   try {
-    const {id} = req.params;
+    const { id } = req.params;
     const messageId = id;
-    if(!messageId) return res.send({"error": "no parameter provided"}).sendStatus(400)
+    if (!messageId)
+      return res.send({ error: "no parameter provided" }).sendStatus(400);
     const { messageType } = req.body;
     if (!messageType) return res.sendStatus(400);
     switch (messageType) {
@@ -202,7 +203,8 @@ export async function putMessageController(
         }
       case "SONDAGGIO":
         const { question, options } = req.body;
-        if (!question || !options) return res.send({"error": "not enopugh argumentss"});
+        if (!question || !options)
+          return res.send({ error: "not enopugh argumentss" });
         let sondaggio: Sondaggio = { question, options };
         const message2 = await updateMessage(
           messageId,
@@ -259,11 +261,11 @@ export async function getMessagesController(
   res: express.Response
 ) {
   try {
-    const { id } = req.params;
+    const { chatId } = req.params;
 
-    if (!id) return res.sendStatus(400);
+    if (!chatId) return res.sendStatus(400);
 
-    const chats = await getMessagesOfChat(id);
+    const chats = await getMessagesOfChat(chatId);
 
     if (!chats) return res.sendStatus(404);
 

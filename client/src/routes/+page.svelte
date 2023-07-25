@@ -117,34 +117,33 @@
 		</main>
 	</div>
 </Phone> -->
-<Phone>
-	<div class="grid h-full place-items-center">
-		<Logo />
 
-		<form class="form-control w-full max-w-lg" on:submit={handleSubmit}>
-			<label for="" class="label">
-				<span class="label-text"> Email </span>
-			</label>
-			<input class="input input-bordered" type="email" bind:value={email} required />
-			<label for="" class="label">
-				<span class="label-text-alt">
-					{errorMessage}
-				</span>
-			</label>
-			<button type="submit" disabled={loading} class={cn('btn btn-primary ')}>
-				{#if loading}
-					<span class="loading loading-spinner" />
-				{:else}
-					Accedi
-				{/if}
-			</button>
-		</form>
-		{#if successMessage != ''}
-			<div class="alert alert-success">
-				<span class="wrap-text">
-					{successMessage}
-				</span>
-			</div>
-		{/if}
-	</div>
-</Phone>
+<div class="grid h-full place-items-center">
+	<Logo />
+
+	<form class="form-control w-full max-w-lg" on:submit={handleSubmit}>
+		<label for="" class="label">
+			<span class="label-text"> Email </span>
+		</label>
+		<input class="input input-bordered" type="email" bind:value={email} required />
+		<label for="" class="label">
+			<span class="label-text-alt">
+				{errorMessage}
+			</span>
+		</label>
+		<button type="submit" disabled={loading} class={cn('btn btn-primary ')}>
+			{#if loading}
+				<span class="loading loading-spinner" />
+			{:else}
+				Accedi
+			{/if}
+		</button>
+	</form>
+	{#if successMessage != ''}
+		<div class="alert alert-success">
+			<span class="wrap-text">
+				{successMessage}
+			</span>
+		</div>
+	{/if}
+</div>

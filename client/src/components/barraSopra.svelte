@@ -2,6 +2,7 @@
 	import { PUBLIC_DEPLOY_URL_SERVER } from '$env/static/public';
 	import { userStore } from '$lib/userStore';
 	import ThemeToggle from '../components/ThemeToggle.svelte';
+	import Logo from './Logo.svelte';
 
 	const logout = async () => {
 		const res = await fetch(`${PUBLIC_DEPLOY_URL_SERVER}/api/auth/logout`, {
@@ -16,8 +17,8 @@
 	};
 </script>
 
-<div class="navbar bg-base-100 ml-2 space-x-2">
-	c
+<div class="navbar space-x-2">
+	<Logo />
 	<ThemeToggle />
 	<div class="dropdown dropdown-end">
 		<details class="dropdown">
@@ -50,3 +51,4 @@
 		</details>
 	</div>
 </div>
+<div class="divider" />

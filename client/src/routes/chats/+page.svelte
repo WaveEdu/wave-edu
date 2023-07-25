@@ -63,7 +63,6 @@
 	<div class="flex h-full w-full flex-col">
 		<header>
 			<BarraSopra />
-			<Stories />
 		</header>
 		<main class="flex h-full flex-col justify-start">
 			{#await getChats()}
@@ -72,19 +71,21 @@
 				{#if data.length > 0}
 					<ul>
 						{#each data as chat}
-							<div class="flex items-center space-x-3">
-								<div class="avatar">
-									<div class="mask mask-squircle h-12 w-12">
-										<img
-											src={`https://api.dicebear.com/6.x/initials/svg?seed=${chat.name}`}
-											alt={chat.name}
-										/>
+							<a href={`/chats/${chat.id}`}>
+								<div class="flex items-center space-x-3 hover:bg-slate-100">
+									<div class="avatar">
+										<div class="mask mask-squircle h-12 w-12">
+											<img
+												src={`https://api.dicebear.com/6.x/initials/svg?seed=${chat.name}`}
+												alt={chat.name}
+											/>
+										</div>
+									</div>
+									<div>
+										<div class="font-bold">{chat.name}</div>
 									</div>
 								</div>
-								<div>
-									<div class="font-bold">{chat.name}</div>
-								</div>
-							</div>
+							</a>
 						{/each}
 					</ul>
 				{:else}
@@ -95,7 +96,7 @@
 			{/await}
 		</main>
 		<footer>
-			<BarraSotto />
+			<BarraSotto active="chats" />
 		</footer>
 	</div>
 </Phone>
