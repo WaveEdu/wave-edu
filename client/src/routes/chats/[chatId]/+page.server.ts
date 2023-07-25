@@ -2,16 +2,16 @@ import { PUBLIC_DEPLOY_URL_SERVER } from '$env/static/public';
 import type { Load } from '@sveltejs/kit';
 
 /** @type {import('@sveltejs/kit').Load} */
-export const load: Load = async ({ url, params, props, fetch, session, stuff, status, error }) => {
-	const resourceUrl = `${PUBLIC_DEPLOY_URL_SERVER}/messages/${params.chatId}`;
+export const load: Load = async ({ params, fetch }) => {
+	const resourceUrl = `${PUBLIC_DEPLOY_URL_SERVER}/api/messages/${params.chatId}`;
+	// const resourceUrl = 'https://jsonplaceholder.typicode.com/todos';
 	const res = await fetch(resourceUrl);
 
 	if (res.ok) {
 		return {
 			status: res.status,
-			props: {
-				propName: await res.json()
-			}
+			messages: await res.json(),
+			chatId: params.chatId
 		};
 	}
 
