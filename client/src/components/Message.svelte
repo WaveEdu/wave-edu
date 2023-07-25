@@ -1,23 +1,52 @@
-<script>
+<script lang="ts">
 	import { PUBLIC_DEPLOY_URL_SERVER } from '$env/static/public';
 	import { userStore } from '$lib/userStore';
 	import { onMount } from 'svelte';
 	import { twJoin } from 'tailwind-merge';
 
-	export let message;
+	interface Message {
+		idComunicazione: number;
+		ownerId: number;
+		ownerName: string;
+		ownerSurname: string;
+		dataComunicazione: string;
+		contentComunicazione: {
+			idContenuto: number;
+			comunicazione: string;
+			ownerId: number;
+			ownerName: string;
+			ownerSurname: string;
+			dataContenuto: string;
+		};
+	}
 
-	let name = '';
+	interface User {
+		idUtente: number;
+		name: string;
+		surname: string;
+		email: string;
+		password: string;
+		role: string;
+	}
+
+	export let message: Message;
+
+	let name: string | undefined = '';
 	let time = '';
 
-	const fetchName = async () => {
-		const user = fetch(`${PUBLIC_DEPLOY_URL_SERVER}/api/user/${message.ownerId}`).then((res) =>
-			res.json()
-		);
-		console.log(user);
-		return user?.name;
+	const fetchName = async (): Promise<string | undefined> => {
+		try {
+			const response = await fetch(`${PUBLIC_DEPLOY_URL_SERVER}/api/user/${message.ownerId}`);
+			const user = await response.json();
+			return user?.name;
+		} catch (error) {
+			// Handle any errors that might occur during the fetch request
+			console.error('Error fetching user data:', error);
+			return undefined;
+		}
 	};
 
-	const elapsedTime = (time) => {
+	const elapsedTime = (time: Date): string => {
 		const now = new Date();
 		const diff = (now.getTime() - time.getTime()) / 1000;
 
