@@ -444,7 +444,7 @@ paths:
       tags:
         - Message
       summary: Create a new message
-      description: Questa API consente a un'applicazione client di aggiungere un nuovo partecipante a una chat o a una conversazione esistente. L'API richiede tipicamente una richiesta autenticata con il livello di autorizzazione appropriato per garantire che solo gli utenti autorizzati possano aggiungere partecipanti a una chat. Una volta ricevuta una richiesta POST con i dati necessari (come l'ID della chat room e l'ID del partecipante), l'API aggiunge il nuovo partecipante alla chat e restituisce un messaggio di successo che indica che l'aggiunta del partecipante è avvenuta con successo.
+      description: Questo endpoint API crea un nuovo messaggio e lo aggiunge a una conversazione o a una chat room specificata. La richiesta conterrà il contenuto del messaggio, il mittente, l’Id della chat e qualsiasi altro metadato rilevante associato al messaggio. La risposta conterrà il messaggio appena creato, compreso il suo ID univoco.
       parameters:
         - name: body
           in: body
@@ -462,24 +462,6 @@ paths:
       responses:
         "201":
           description: New message created
-
-     get:
-      tags:
-        - Message
-      summary: Get all message
-      parameters:
-        - name: body
-          in: body
-          schema:
-            type: object
-            properties:
-              MessageId:
-                type: string
-      security:
-        - teacher: []
-      responses:
-        200:
-          description: Messages Acquired Successfully 
           schema:
             type: object
             properties:
@@ -487,6 +469,7 @@ paths:
                 type: string
               messageType:
                 type: string
+                description: Si può avere diversi tipi di messaggio tra cui LEZIONE, COMPITO, SONDAGGIO, EVENTO e COMUNICAZIONE
               createdAt:
                 type: string
               updatedAt:
@@ -500,44 +483,48 @@ paths:
               content:
                 type: string
                 description: Può essere sia un semplice testo che un array, inoltre il content, in determinati casi, oltre al type string contiene il type DateTime per la data
-#     get:
-#      tags:
-#        - Message
-#      summary: Get last message
-#      parameters:
-#        - name: body
-#          in: body
-#          schema:
-#            type: object
-#            properties:
-#              MessageId:
-#                type: string
-#      security:
-#        - teacher: []
-#      responses:
-#        200:
-#          description: Messages Acquired Successfully 
-#          schema:
-#            type: object
-#            properties:
-#              id:
-#                type: string
-#              messageType:
-#                type: string
-#              createdAt:
-#                type: string
-#              updatedAt:
-#                type: string
-#              Chat:
-#                type: string
-#              chatId:
-#                type: string
-#              ownerId:
-#                type: string
-#              content:
-#                type: string
-#                description: Può essere sia un semplice testo che un array, inoltre il content, in determinati casi, oltre al type string contiene il type DateTime per la data
-          
+
+
+     get:
+      tags:
+        - Message
+      summary: Get all message
+      description: Questo endpoint può essere utilizzato per recuperare tutti i messaggi di una particolare conversazione o chat o per recuperare i messaggi di più conversazioni o chat. La risposta conterrà un elenco di messaggi, ciascuno dei quali contiene informazioni quali il contenuto del messaggio, la data e l'ora e qualsiasi altro metadato pertinente.
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              chatId:
+                type: string
+      security:
+        - teacher: []
+      responses:
+        200:
+          description: Messages Acquired Successfully 
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              messageType:
+                type: string
+                description: Si può avere diversi tipi di messaggio tra cui LEZIONE, COMPITO, SONDAGGIO, EVENTO e COMUNICAZIONE
+              createdAt:
+                type: string
+              updatedAt:
+                type: string
+              Chat:
+                type: string
+              chatId:
+                type: string
+              ownerId:
+                type: string
+              content:
+                type: string
+                description: Può essere sia un semplice testo che un array, inoltre il content, in determinati casi, oltre al type string contiene il type DateTime per la data
+
      delete:
       tags:
         - Message
@@ -558,8 +545,6 @@ paths:
         "204":
           description: All messages removed
           
-
-                
   /message/{id}:
      put:
       tags:
@@ -568,26 +553,96 @@ paths:
       parameters:
         - name: id
           in: path
-          description: ID of chat to delete
+          description: ID of message to update
           required: true
           type: string
+        - name: body
+          in: body
+          description: ID of chat
+          schema:
+            type: object
+            properties:
+              messageType:
+                type: string
+                description: Si può avere diversi tipi di messaggio tra cui LEZIONE, COMPITO, SONDAGGIO, EVENTO e COMUNICAZIONE
       security:
         - teacher: []
       responses:
         "200":
-          description: chat updated successfully
+          description: Message updated successfully
           schema:
             type: object
             properties:
-              id chat:
+              id:
                 type: string
-              name:
+              messageType:
                 type: string
-                
+                description: Si può avere diversi tipi di messaggio tra cui LEZIONE, COMPITO, SONDAGGIO, EVENTO e COMUNICAZIONE
+              createdAt:
+                type: string
+              updatedAt:
+                type: string
+              Chat:
+                type: string
+              chatId:
+                type: string
+              ownerId:
+                type: string
+              content:
+                type: string
+                description: Può essere sia un semplice testo che un array, inoltre il content, in determinati casi, oltre al type string contiene il type DateTime per la data
+
+     get:
+      tags:
+        - Message
+      summary: Get message by ID
+      description: Questo endpoint può essere utilizzato per recuperare un singolo messaggio da una conversazione o da una chat room, oppure per recuperare messaggi da più conversazioni o chat room in base al suo ID. La risposta conterrà il contenuto del messaggio e qualsiasi altro metadato pertinente associato al messaggio.
+      parameters:
+        - name: id
+          in: path
+          description: ID of message to get
+          required: true
+          type: string
+        - name: body
+          in: body
+          description: ID of chat
+          schema:
+            type: object
+            properties:
+              chatId:
+                type: string
+      security:
+        - teacher: []
+      responses:
+        "200":
+          description: Message Acquired successfully
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              messageType:
+                type: string
+                description: Si può avere diversi tipi di messaggio tra cui LEZIONE, COMPITO, SONDAGGIO, EVENTO e COMUNICAZIONE
+              createdAt:
+                type: string
+              updatedAt:
+                type: string
+              Chat:
+                type: string
+              chatId:
+                type: string
+              ownerId:
+                type: string
+              content:
+                type: string
+                description: Può essere sia un semplice testo che un array, inoltre il content, in determinati casi, oltre al type string contiene il type DateTime per la data
+
      delete:
       tags:
         - Message
       summary: Delete message by ID
+      description: Questo endpoint API elimina un messaggio specifico in base al suo Id. Questo endpoint può essere utilizzato per eliminare un singolo messaggio da una conversazione o da una chat room inserendo l’Id della chat e l’Id de messaggio in questione. La risposta conterrà un avviso di avvenuta eliminazione del messaggio.
       parameters:
         - name: id
           in: path
@@ -598,7 +653,7 @@ paths:
         - teacher: []
       responses:
         "204":
-          description: chat removed successfully
+          description: Message removed successfully
           schema:
             type: object
             properties:
