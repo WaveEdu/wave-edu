@@ -550,6 +550,7 @@ paths:
       tags:
         - Message
       summary: Update message by ID
+      description: Questo endpoint API aggiorna un messaggio specifico in base al suo Id. La richiesta conterrà l’Id del messaggio, il contenuto aggiornato di quest’ultimo e qualsiasi altro metadato pertinente associato al messaggio. La risposta conterrà il contenuto aggiornato del messaggio e qualsiasi altro metadato pertinente.
       parameters:
         - name: id
           in: path
